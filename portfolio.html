@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viola Kintrová - Medical Student & Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Viola Kintrová, a medical student at the University of Ostrava and a security-first full-stack developer.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --medical-blue: #002366;
+            --light-blue: #4a90e2;
+            --electric-blue: #00d4ff;
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a2332;
+            --text-primary: #e8edf5;
+            --text-secondary: #a0aec0;
+            --border-color: rgba(74, 144, 226, 0.2);
+            --glow-color: rgba(0, 212, 255, 0.3);
+        }
+
+        /* Provide fallback for @property */
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none; /* Custom cursor */
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand-logo, .section-label {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: none; /* Handled by custom cursor */
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Custom Cursor */
+        #cursor-dot, #cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+        }
+        
+        #cursor-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--electric-blue);
+        }
+        
+        #cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            transition: transform 0.1s ease-out, width 0.2s, height 0.2s;
+        }
+
+        /* Hide custom cursor on mobile */
+        @media (max-width: 768px) {
+            #cursor-dot, #cursor-ring { display: none; }
+            body, a, button { cursor: auto; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(10, 14, 26, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--electric-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--electric-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--electric-blue);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: none;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-label {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            margin-bottom: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-label::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--electric-blue);
+            margin: 0.5rem auto 0;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #dna-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 800px;
+        }
+
+        /* Profile Photo with Border Glow */
+        .profile-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            padding: 4px; /* Space for the sweeping border */
+            background-image: conic-gradient(from var(--angle), transparent 20%, var(--electric-blue), transparent 80%);
+            animation: rotateGlow 3s infinite linear;
+        }
+
+        .profile-container::before { /* Fallback background in case Houdini fails */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            z-index: -1;
+            background: conic-gradient(from var(--angle), transparent 20%, var(--electric-blue), transparent 80%);
+            animation: rotateGlow 3s infinite linear;
+        }
+
+        .profile-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--bg-primary);
+            border: 4px solid var(--bg-primary); /* To clip inside the glowing padding */
+        }
+
+        @keyframes rotateGlow {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
+
+        /* Keep fallback animation for browsers that don't support @property */
+        @supports not (background: paint(something)) {
+            .profile-container::before {
+                animation: rotateFallback 3s infinite linear;
+            }
+            @keyframes rotateFallback {
+                100% { transform: rotate(360deg); }
+            }
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(to right, var(--electric-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+        }
+
+        .hero-oneliner {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-top: -0.5rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--electric-blue);
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--electric-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover {
+            background: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 0 15px var(--glow-color);
+            color: #fff;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* About Dual Identity Section */
+        #about {
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .dual-identity-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+            border-radius: 12px;
+        }
+
+        .flip-card:hover .flip-card-inner, 
+        .flip-card.flipped .flip-card-inner { /* for mobile */
+            transform: rotateY(180deg);
+            box-shadow: -4px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+        }
+
+        .flip-card-front {
+            color: var(--text-primary);
+        }
+
+        .flip-card-front i {
+            font-size: 4rem;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+            /* Use unicode for simplicity to avoid external icons */
+            font-style: normal; 
+        }
+
+        .flip-card-front .icon-med::before { content: '⚕'; }
+        .flip-card-front .icon-dev::before { content: '</>'; font-family: 'Orbitron'; font-weight: 700;}
+
+        .flip-card-front h3 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--bg-tertiary), #0f172a);
+            transform: rotateY(180deg);
+            color: var(--text-secondary);
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .flip-card-back h3 {
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .flip-card-back ul {
+            list-style: none;
+        }
+
+        .flip-card-back li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .flip-card-back li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--light-blue);
+        }
+
+        .about-bio {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            padding: 2rem;
+            background: rgba(26, 35, 50, 0.4);
+            border-left: 4px solid var(--electric-blue);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: var(--bg-secondary);
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .skills-category {
+            margin-bottom: 3rem;
+        }
+
+        .skills-category h3 {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-pill {
+            position: relative;
+            padding: 0.6rem 1.2rem;
+            background: var(--bg-tertiary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            z-index: 1;
+            /* Wrap trick for sweeping background */
+        }
+        
+        .skill-pill-wrap {
+            position: relative;
+            padding: 2px;
+            border-radius: 50px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .skill-pill-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50px;
+            z-index: -1;
+            background: conic-gradient(from var(--angle), transparent 20%, var(--electric-blue) 50%, transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-pill-wrap:hover::before {
+            opacity: 1;
+            animation: rotateGlowFast 0.4s linear;
+            animation-iteration-count: 3;
+        }
+
+        @keyframes rotateGlowFast {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: var(--bg-primary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .project-card-wrap {
+            position: relative;
+            padding: 2px;
+            border-radius: 12px;
+            background: conic-gradient(from var(--angle), transparent 30%, var(--glow-color), transparent 70%);
+            animation: rotateGlow 8s infinite linear;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .project-card-wrap:hover {
+            transform: translateY(-6px);
+            filter: drop-shadow(0 15px 20px rgba(0, 212, 255, 0.1));
+            animation-duration: 1.5s;
+            background: conic-gradient(from var(--angle), transparent 10%, var(--electric-blue), transparent 90%);
+        }
+
+        .project-card {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        .status-dev {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbd38d;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .status-prod, .status-live {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--light-blue);
+            background: rgba(74, 144, 226, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-cta {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--electric-blue);
+            display: inline-block;
+            font-style: italic;
+        }
+
+        /* Experience Timeline */
+        #experience {
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .timeline {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            /* Handled by IntersectionObserver */
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.3rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--electric-blue);
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--electric-blue);
+            transition: transform 0.3s;
+        }
+
+        .timeline-item.visible::before {
+            animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 5px var(--electric-blue); }
+            50% { transform: translateX(-50%) scale(1.3); box-shadow: 0 0 15px var(--electric-blue), 0 0 30px var(--glow-color); }
+            100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 5px var(--electric-blue); }
+        }
+
+        .time-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--electric-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .time-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .time-org {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Grid sections for lower part */
+        .bottom-sections-wrap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-sections-wrap {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Languages Section */
+        #languages {
+            background-color: var(--bg-tertiary);
+            padding: 4rem 5%;
+        }
+
+        .languages-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .lang-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 140px;
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .lang-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lang-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .lang-lvl {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Training & Education */
+        #training-edu {
+            background-color: var(--bg-secondary);
+        }
+
+        .edu-card {
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--electric-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .edu-inst {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .edu-deg {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+
+        .edu-date {
+            font-size: 0.8rem;
+            color: var(--electric-blue);
+        }
+
+        .training-list {
+            list-style: none;
+        }
+
+        .training-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .training-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--electric-blue);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #050810;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        #contact-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .contact-panel {
+            position: relative;
+            z-index: 1;
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-link {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--electric-blue);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .contact-closing {
+            margin-top: 2rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #03050a;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .nav-links.nav-open {
+                transform: translateY(0);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .flip-card {
+                height: 400px;
+            }
+
+            .dual-identity-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 0;
+            }
+            .timeline::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline-item {
+                text-align: center;
+            }
+            .timeline-item::before {
+                left: 50%;
+                top: -15px;
+            }
+
+            /* Disable hover cards and fallback to simpler presentation */
+            .lang-card {
+                transform: none !important;
+            }
+        }
+        
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            #dna-canvas, #contact-canvas {
+                display: none;
+            }
+            .project-card-wrap:hover {
+                transform: none;
+                filter: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor elements -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <header>
+        <nav>
+            <div class="brand-logo">VK</div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+            <div class="nav-links" id="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <canvas id="dna-canvas"></canvas>
+            <div class="hero-content">
+                <div class="profile-container">
+                    <!-- Gravatar URL using the md5 hash computed: fd10ac3fc154259dd94c47f2dd03b384 -->
+                    <img src="https://www.gravatar.com/avatar/fd10ac3fc154259dd94c47f2dd03b384?s=400" alt="Viola Kintrová Profile" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%230a0e1a\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'150\' font-weight=\'bold\' fill=\'%2300d4ff\' dominant-baseline=\'middle\' text-anchor=\'middle\'>VK</text></svg>'">
+                </div>
+                <h1 class="hero-name">VIOLA KINTROVÁ</h1>
+                <h2 class="hero-subtitle">Medical Student & Full-Stack Developer</h2>
+                <p class="hero-oneliner">"I debug code and diagnose patients. Sometimes the error messages are the same."</p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn">View My Work &darr;</a>
+                    <a href="#contact" class="btn">Download CV</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-label">Dual Identity</h2>
+            <div class="dual-identity-container">
+                <!-- Developer Card -->
+                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="icon-dev"></i>
+                            <h3>Developer Viola</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Tech Arsenal</h3>
+                            <ul>
+                                <li>PHP (mysqli prepared statements)</li>
+                                <li>MySQL</li>
+                                <li>Web Crypto API</li>
+                                <li>REST API</li>
+                                <li>Google Apps Script</li>
+                                <li>Role-based access control</li>
+                                <li>Payment gateway integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Medical Card -->
+                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="icon-med"></i>
+                            <h3>Medical Viola</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Clinical Path</h3>
+                            <ul>
+                                <li>University of Ostrava</li>
+                                <li>General Medicine 2023–2029</li>
+                                <li><b>Focus Areas:</b></li>
+                                <li>Emergency medicine</li>
+                                <li>Prehospital care</li>
+                                <li>Simulation medicine</li>
+                                <li>Medical education systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <p class="about-bio">
+                Medical student and full-stack developer with hands-on experience building secure, data-driven web applications for medical student organizations...
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-label">Tech Stack</h2>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3>Core Technologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill-wrap"><div class="skill-pill">PHP (mysqli)</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">MySQL</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">HTML5</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">CSS3</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">JavaScript (ES6+)</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Google Apps Script</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Web Crypto API</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">REST APIs</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Payment Gateway Integration</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Role-Based Access Control</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Input Validation & Sanitization</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">CSV Export</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">WordPress + Divi</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Responsive Design</div></div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Tools & Methods</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill-wrap"><div class="skill-pill">Firebase</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Cursor</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Windsurf</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">AI-Augmented Development</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Version Control</div></div>
+                        <div class="skill-pill-wrap"><div class="skill-pill">Security-First Design Patterns</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-label">What I've Built</h2>
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="project-card-wrap">
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">EuRegMe Merchandise E-Shop</h3>
+                            <span class="status-badge status-live">Live</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Payment Gateway</span>
+                            <span class="tag">Role-Based Access</span>
+                            <span class="tag">Prepared Statements</span>
+                        </div>
+                        <p class="project-desc">
+                            Full-stack e-commerce system for a European medical student conference. Custom PHP API, role-separated admin/user interfaces, injection-safe MySQL with prepared statements, automated order email workflows, CSV export. It's live now; some parts are disabled, but it's free to use and still available for a technical walkthrough.
+                        </p>
+                    </article>
+                </div>
+
+                <!-- Project 2 (Commented Out) -->
+                <!--
+                <div class="project-card-wrap">
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">IFMSA Certificate Verification Interface</h3>
+                            <span class="status-badge status-prod">Production</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Web Crypto API</span>
+                            <span class="tag">SHA-256</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">UX Design</span>
+                            <span class="tag">Security</span>
+                        </div>
+                        <p class="project-desc">
+                            Client-side SHA-256 hashing via Web Crypto API — PDF never leaves the browser. Only the hash is transmitted to the backend. Drag-and-drop upload, animated loading state, instant verification feedback. Sub-5-second full flow. CSRF/XSS protected.
+                        </p>
+                    </article>
+                </div>
+                -->
+
+                <!-- Project 2 Alternative -->
+                <div class="project-card-wrap">
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">EuRegMe 2026 Survival Guide PWA</h3>
+                            <span class="status-badge status-prod">Production</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">PWA</span>
+                            <span class="tag">Vanilla JS</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">Interactivity</span>
+                        </div>
+                        <p class="project-desc">
+                            A comprehensive Progressive Web App for event participants. Features include an interactive agenda with timezone-localized formatting, dynamic venue map toggles, and "Cafe Rush"—a fully playable, embedded coffee-serving minigame with scoring, lives, and custom sprites.
+                        </p>
+                    </article>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card-wrap">
+                    <article class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">IFMSA Czech Republic National Website Rebuild</h3>
+                            <span class="status-badge status-live">Live</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">Divi</span>
+                            <span class="tag">HTML/CSS/JS</span>
+                            <span class="tag">DNS</span>
+                            <span class="tag">SEO</span>
+                            <span class="tag">Content Architecture</span>
+                        </div>
+                        <p class="project-desc">
+                            Complete reconstruction of the national website as VP for Public Relations. Focus on non-technical maintainability for future board transitions. Custom interactive modules, unified visual identity, DNS + hosting management.
+                        </p>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section id="experience">
+            <h2 class="section-label">Experience</h2>
+            <div class="timeline" id="timeline">
+                
+                <div class="timeline-item">
+                    <div class="time-date">2025 – Present</div>
+                    <h3 class="time-title">Full-Stack Developer – EuRegMe E-Shop</h3>
+                    <div class="time-org">IFMSA-related Project</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-date">Oct 2024 – Aug 2025</div>
+                    <h3 class="time-title">Vice President for Public Relations</h3>
+                    <div class="time-org">IFMSA Czech Republic</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-date">2024 – Present</div>
+                    <h3 class="time-title">Technical & Creative Lead – Adaptation Course</h3>
+                    <div class="time-org">IFMSA Czech Republic</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="time-date">2024 – Present</div>
+                    <h3 class="time-title">Web & Workflow Automation Developer</h3>
+                    <div class="time-org">IFMSA-related & Independent Projects</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages">
+            <h2 class="section-label">Languages</h2>
+            <div class="languages-container" id="languages-container">
+                <div class="lang-card">
+                    <div class="lang-emoji">🇨🇿</div>
+                    <div class="lang-name">Czech</div>
+                    <div class="lang-lvl">Native</div>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-emoji">🇬🇧</div>
+                    <div class="lang-name">English</div>
+                    <div class="lang-lvl">Fluent C1</div>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-emoji">🇪🇸</div>
+                    <div class="lang-name">Spanish</div>
+                    <div class="lang-lvl">Working Proficiency</div>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-emoji">🇮🇹</div>
+                    <div class="lang-name">Italian</div>
+                    <div class="lang-lvl">Conversational</div>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-emoji">🇫🇷</div>
+                    <div class="lang-name">French</div>
+                    <div class="lang-lvl">Basic Professional</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="training-edu">
+            <div class="bottom-sections-wrap">
+                <!-- Training -->
+                <div>
+                    <h2 class="section-label" style="font-size: 1.5rem;">Training & Certifications</h2>
+                    <ul class="training-list">
+                        <li>OpenAI Academy – Advanced Features for Nonprofits: ChatGPT's Next-Level Tools (2025)</li>
+                        <li>Google Skills – Using Gemini Throughout the Software Development Lifecycle (In Progress)</li>
+                        <li>LABA – Brand Strategy & Identity Building</li>
+                    </ul>
+                </div>
+                
+                <!-- Education -->
+                <div>
+                    <h2 class="section-label" style="font-size: 1.5rem;">Education</h2>
+                    <div class="edu-card">
+                        <div class="edu-inst">University of Ostrava</div>
+                        <div class="edu-deg">General Medicine</div>
+                        <div class="edu-date">2023 – 2029 (Expected)</div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 0;">
+                            Focus areas: emergency medicine, prehospital care, simulation medicine, healthcare innovation
+                        </p>
+                    </div>
+                    <div class="edu-card">
+                        <div class="edu-inst">Biskupské Gymnázium Brno</div>
+                        <div class="edu-deg">Grammar School</div>
+                        <div class="edu-date">2018 – 2022</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <canvas id="contact-canvas"></canvas>
+            <div class="contact-panel">
+                <h2 class="section-label">Get In Touch</h2>
+                <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
+                <a href="tel:+420737722493" class="contact-link">+420-737-722-493</a>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Ostrava, Czech Republic</p>
+                <p class="contact-closing">"Open to technical collaborations, freelance work, and interesting problems."</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Viola Kintrová &middot; 2026 &middot; Built with pure HTML/CSS/JS &middot; No frameworks were harmed.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const isMobile = window.innerWidth <= 768;
+
+            /* ==========================================
+               CUSTOM CURSOR
+            ========================================== */
+            if (!isMobile) {
+                const dot = document.getElementById('cursor-dot');
+                const ring = document.getElementById('cursor-ring');
+                
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let ringX = mouseX;
+                let ringY = mouseY;
+                
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                });
+                
+                // Linear interpolation for smooth lag
+                const lerp = (start, end, factor) => {
+                    return start + (end - start) * factor;
+                };
+                
+                const animateCursor = () => {
+                    ringX = lerp(ringX, mouseX, 0.15);
+                    ringY = lerp(ringY, mouseY, 0.15);
+                    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+                    requestAnimationFrame(animateCursor);
+                };
+                
+                animateCursor();
+                
+                // Hover effects
+                const interactables = document.querySelectorAll('a, button, .flip-card, .skill-pill-wrap, .project-card-wrap');
+                interactables.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        dot.style.width = '20px';
+                        dot.style.height = '20px';
+                        ring.style.opacity = '0';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        dot.style.width = '12px';
+                        dot.style.height = '12px';
+                        ring.style.opacity = '1';
+                    });
+                });
+            }
+
+            /* ==========================================
+               NAVIGATION
+            ========================================== */
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('nav-open');
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(navLinks.classList.contains('nav-open')) {
+                        navLinks.classList.remove('nav-open');
+                    }
+                });
+            });
+
+            // Scrollspy
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute('id');
+                        navItems.forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('href') === `#${currentId}`) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            /* ==========================================
+               SCROLL ANIMATIONS (Timeline)
+            ========================================== */
+            if (!isReducedMotion) {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                const timelineObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(timelineItems).indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 150}ms`;
+                            entry.target.style.transitionProperty = 'opacity, transform';
+                            entry.target.style.transitionDuration = '0.5s';
+                            entry.target.style.transitionTimingFunction = 'ease';
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target); // Animate once
+                        }
+                    });
+                }, { threshold: 0.2 });
+
+                timelineItems.forEach(item => timelineObserver.observe(item));
+            } else {
+                // Instantly visible if reduced motion Let's use CSS or just class add
+                document.querySelectorAll('.timeline-item').forEach(i => i.classList.add('visible'));
+            }
+
+            /* ==========================================
+               MAGNETIC TILT (Language cards)
+            ========================================== */
+            if (!isMobile && !isReducedMotion) {
+                const langCards = document.querySelectorAll('.lang-card');
+                
+                langCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left; // x position within the element.
+                        const y = e.clientY - rect.top;  // y position within the element.
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const deltaX = x - centerX;
+                        const deltaY = y - centerY;
+                        
+                        // Rotate X based on Y offset, Rotate Y based on X offset
+                        card.style.transform = `perspective(600px) rotateX(${-deltaY * 0.05}deg) rotateY(${deltaX * 0.05}deg)`;
+                        card.style.transition = 'none';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'perspective(600px) rotateX(0) rotateY(0)';
+                        card.style.transition = 'transform 0.5s ease';
+                    });
+                });
+            }
+
+            /* ==========================================
+               DNA HELIX CANVAS ANIMATION
+            ========================================== */
+            if (!isReducedMotion) {
+                const canvases = [
+                    document.getElementById('dna-canvas'),
+                    document.getElementById('contact-canvas')
+                ];
+                
+                const ctxs = canvases.map(c => c ? c.getContext('2d') : null);
+                let phase = 0;
+                
+                // Only setup and animate canvases that exist
+                const activeCanvases = canvases.map((canvas, i) => {
+                    if (!canvas) return null;
+                    return { canvas, ctx: ctxs[i] };
+                }).filter(Boolean);
+
+                const resizeCanvas = () => {
+                    activeCanvases.forEach(({ canvas }) => {
+                        const parent = canvas.parentElement;
+                        canvas.width = parent.offsetWidth;
+                        canvas.height = parent.offsetHeight;
+                    });
+                };
+
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                const drawHelix = () => {
+                    activeCanvases.forEach(({ canvas, ctx }) => {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        
+                        const centerY = canvas.height / 2;
+                        const amplitude = canvas.height * 0.2; // How tall the wave is
+                        const frequency = 0.015; // How compressed the wave is
+                        const nodeSpacing = isMobile ? 60 : 30; // 50% reduction on mobile
+                        const electricBlue = '0, 212, 255';
+                        const lightBlue = '74, 144, 226';
+                        
+                        // We draw from left to right
+                        for (let x = 0; x < canvas.width; x += nodeSpacing) {
+                            
+                            // Calculate depth (z) to simulate 3D rotation
+                            const z1 = Math.cos(x * frequency + phase);
+                            const z2 = Math.cos(x * frequency + phase + Math.PI);
+                            
+                            // Calculate vertical positions
+                            const y1 = centerY + Math.sin(x * frequency + phase) * amplitude;
+                            const y2 = centerY + Math.sin(x * frequency + phase + Math.PI) * amplitude;
+                            
+                            // Scale size and opacity based on depth (z)
+                            // z goes from -1 to 1.
+                            // map z from [-1, 1] to [0.2, 1] for scale
+                            const scale1 = (z1 + 1) / 2 * 0.6 + 0.4;
+                            const scale2 = (z2 + 1) / 2 * 0.6 + 0.4;
+                            
+                            const alpha1 = (z1 + 1) / 2 * 0.6 + 0.4;
+                            const alpha2 = (z2 + 1) / 2 * 0.6 + 0.4;
+                            
+                            // Draw backbone connectors
+                            ctx.beginPath();
+                            ctx.moveTo(x, y1);
+                            ctx.lineTo(x, y2);
+                            ctx.strokeStyle = `rgba(74, 144, 226, 0.25)`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                            
+                            // Draw strand 1 node (light blue) - draw smaller/backwards first
+                            if (z1 < z2) {
+                                drawNode(ctx, x, y1, scale1, alpha1, lightBlue);
+                                drawNode(ctx, x, y2, scale2, alpha2, electricBlue);
+                            } else {
+                                drawNode(ctx, x, y2, scale2, alpha2, electricBlue);
+                                drawNode(ctx, x, y1, scale1, alpha1, lightBlue);
+                            }
+                        }
+                    });
+                    
+                    phase -= 0.02; // scroll speed
+                    requestAnimationFrame(drawHelix);
+                };
+                
+                const drawNode = (ctx, x, y, scale, alpha, color) => {
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4 * scale, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${color}, ${alpha})`;
+                    ctx.fill();
+                    
+                    // Add slight glow
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = `rgba(${color}, ${alpha})`;
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset
+                };
+
+                drawHelix();
+            }
+        });
+    </script>
+</body>
+</html>
