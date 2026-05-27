@@ -56,6 +56,17 @@
             cursor: none; /* Handled by custom cursor */
         }
 
+        /* Accessibility focus states */
+        :focus-visible {
+            outline: 2px solid var(--electric-blue);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        .flip-card:focus-visible {
+            outline-offset: 8px;
+        }
+
         p {
             margin-bottom: 1rem;
         }
@@ -993,7 +1004,7 @@
             <h2 class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Viola details">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev"></i>
@@ -1015,7 +1026,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Viola details">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med"></i>
@@ -1405,6 +1416,26 @@
                 // Instantly visible if reduced motion Let's use CSS or just class add
                 document.querySelectorAll('.timeline-item').forEach(i => i.classList.add('visible'));
             }
+
+            /* ==========================================
+               FLIP CARDS KEYBOARD ACCESSIBILITY
+            ========================================== */
+            const flipCards = document.querySelectorAll('.flip-card');
+            flipCards.forEach(card => {
+                const toggleCard = () => {
+                    const isFlipped = card.classList.toggle('flipped');
+                    card.setAttribute('aria-expanded', isFlipped);
+                };
+
+                card.addEventListener('click', toggleCard);
+
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard();
+                    }
+                });
+            });
 
             /* ==========================================
                MAGNETIC TILT (Language cards)
