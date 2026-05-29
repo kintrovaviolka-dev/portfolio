@@ -1,0 +1,3 @@
+## 2026-05-29 - Accessible Interactive CSS Components
+**Learning:** Pure CSS interactive components (like hover-based flip cards) completely bypass keyboard users unless explicitly managed. They require `tabindex="0"` to enter the focus order, a dedicated `:focus-visible` style mirror to trigger the visual change, and a JavaScript event listener to toggle state via keyboard keys (Enter/Space).
+**Action:** Always verify that visual state changes triggered by `:hover` have a corresponding `:focus-visible` trigger, and ensure interactive elements that aren't native inputs/buttons have appropriate `tabindex`, `aria-label`, and keyboard event handling.
