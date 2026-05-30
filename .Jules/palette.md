@@ -1,0 +1,3 @@
+## 2026-05-30 - Keyboard Accessibility for Hover Cards
+**Learning:** Pure CSS hover cards (`:hover` to flip) trap content away from keyboard-only users, making critical information inaccessible.
+**Action:** Always pair `:hover` state changes that reveal content with `:focus-visible` and ensure the triggering container has `tabindex="0"`. Additionally, ensure a global `:focus-visible` outline is defined to make keyboard navigation apparent.
