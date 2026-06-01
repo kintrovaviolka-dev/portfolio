@@ -1,0 +1,3 @@
+## 2025-06-01 - Keyboard Accessible CSS Interactions
+**Learning:** Found hover-only interactions (like flip-cards) lacking keyboard support. Pure CSS `:hover` states don't translate to keyboard navigation. Using `tabindex="0"`, `role="button"`, and small JS keydown event handlers (`Enter`/`Space`) makes interactive widgets completely keyboard accessible while retaining visual styling.
+**Action:** When creating flip-cards or complex interactive widgets, always include `tabindex`, keyboard event listeners, and trigger visual states through a `:focus-visible` pseudo-class as well.
