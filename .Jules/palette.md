@@ -1,0 +1,3 @@
+## 2026-06-02 - Mapping Hover Styles to Focus States
+**Learning:** When adding custom, complex `:hover` animations (like glowing rings or 3D flips) to interactive elements that are not inherently focusable (like divs/articles used as cards), keyboard users miss critical interaction cues if `:focus-visible` isn't mapped to these same styles.
+**Action:** Always pair rich `:hover` states with `:focus-visible` and ensure custom interactive elements have `tabindex="0"` and keyboard event handlers (like `onkeydown` for Enter/Space) so they are fully accessible to screen reader and keyboard-only users.
