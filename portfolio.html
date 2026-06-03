@@ -131,8 +131,9 @@
             position: relative;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.active {
             color: var(--electric-blue);
+            outline: none;
         }
 
         .nav-links a::after {
@@ -146,7 +147,7 @@
             transition: width 0.3s;
         }
 
-        .nav-links a:hover::after, .nav-links a.active::after {
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a.active::after {
             width: 100%;
         }
 
@@ -313,13 +314,15 @@
             transition: left 0.5s ease;
         }
 
-        .btn:hover {
+        .btn:hover, .btn:focus-visible {
             background: rgba(0, 212, 255, 0.15);
             box-shadow: 0 0 15px var(--glow-color);
             color: #fff;
+            outline: 2px solid var(--electric-blue);
+            outline-offset: 4px;
         }
 
-        .btn:hover::before {
+        .btn:hover::before, .btn:focus-visible::before {
             left: 100%;
         }
 
@@ -356,9 +359,15 @@
         }
 
         .flip-card:hover .flip-card-inner, 
+        .flip-card:focus-visible .flip-card-inner,
         .flip-card.flipped .flip-card-inner { /* for mobile */
             transform: rotateY(180deg);
             box-shadow: -4px 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .flip-card:focus-visible {
+            outline: 2px solid var(--electric-blue);
+            border-radius: 12px;
         }
 
         .flip-card-front, .flip-card-back {
@@ -502,7 +511,7 @@
             will-change: transform;
         }
 
-        .skill-pill-wrap:hover::before {
+        .skill-pill-wrap:hover::before, .skill-pill-wrap:focus-visible::before {
             opacity: 1;
             animation: rotateGlowFast 0.4s linear infinite;
         }
@@ -546,13 +555,14 @@
             transition: background 0.4s ease, animation-duration 0.4s ease;
         }
 
-        .project-card-wrap:hover {
+        .project-card-wrap:hover, .project-card-wrap:focus-visible {
             transform: translateY(-6px);
             filter: drop-shadow(0 15px 20px rgba(0, 212, 255, 0.1));
             z-index: 2;
+            outline: none;
         }
 
-        .project-card-wrap:hover::before {
+        .project-card-wrap:hover::before, .project-card-wrap:focus-visible::before {
             animation-duration: 1.5s;
             background: conic-gradient(transparent 10%, var(--electric-blue), transparent 90%);
         }
@@ -859,9 +869,10 @@
             transition: color 0.3s, text-shadow 0.3s;
         }
 
-        .contact-link:hover {
+        .contact-link:hover, .contact-link:focus-visible {
             color: var(--electric-blue);
             text-shadow: 0 0 10px var(--glow-color);
+            outline: none;
         }
 
         .contact-closing {
@@ -993,7 +1004,7 @@
             <h2 class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" role="button" tabindex="0" aria-label="Toggle Developer Identity Info" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.classList.toggle('flipped'); }">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev"></i>
@@ -1015,7 +1026,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" role="button" tabindex="0" aria-label="Toggle Medical Identity Info" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.classList.toggle('flipped'); }">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med"></i>
