@@ -1,0 +1,3 @@
+## 2024-06-03 - Keyboard Accessibility for Custom Interactive Elements
+**Learning:** In custom built UIs without component libraries, elements visually designed to be interactive (like the `.flip-card` panels) but built with `onclick` handlers on non-interactive semantic tags (`<article>`, `<div>`) lack keyboard focus and trigger support by default.
+**Action:** When adding interactive behaviors via JavaScript to non-interactive semantic elements, explicitly add `tabindex="0"`, appropriate `role` attributes, `aria-label`s, and `onkeydown` event handlers to support `Enter` and `Space` key activation. Additionally, ensure existing `:hover` CSS effects are mapped to `:focus-visible` to provide visual cues for keyboard navigation.
