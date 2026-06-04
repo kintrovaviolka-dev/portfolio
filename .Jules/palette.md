@@ -1,0 +1,3 @@
+## 2026-06-04 - Keyboard accessibility for CSS-driven interaction
+**Learning:** Pure CSS interactivity based on `:hover` requires explicit DOM attributes to become keyboard accessible. `:focus-visible` is excellent for matching hover styles for keyboard users without affecting mouse users, but JavaScript is still required to handle keydown events since non-button elements do not natively map Enter/Space to `onclick`.
+**Action:** When using `:hover` for visual states on custom interactive elements (like flip cards), explicitly add `tabindex="0"`, `role="button"`, `aria-label`, map `:hover` CSS to `:focus-visible`, and use `onkeydown` to handle `Enter` and `Space` keys.
