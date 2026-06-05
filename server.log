@@ -1,0 +1,2 @@
+127.0.0.1 - - [05/Jun/2026 04:17:05] "HEAD /portfolio.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Jun/2026 04:17:51] "GET /portfolio.html HTTP/1.1" 200 -
