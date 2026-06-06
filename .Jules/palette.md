@@ -1,0 +1,3 @@
+## 2026-06-06 - Keyboard Accessible Flip Cards
+**Learning:** Custom interactive elements (like `article` acting as a flip card) that rely solely on `:hover` and `onclick` create a barrier for keyboard-only users who cannot access the flip functionality.
+**Action:** Always add `tabindex="0"`, `role="button"`, an appropriate `aria-label`, an `onkeydown` handler for `Enter` and `Space`, and map `:hover` states to `:focus-visible` when implementing custom non-interactive elements as interactive components.
