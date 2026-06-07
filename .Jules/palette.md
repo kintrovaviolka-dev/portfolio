@@ -1,0 +1,3 @@
+## 2026-06-07 - Interactive Flip Cards Keyboard Accessibility
+**Learning:** Custom interactive elements (like flip cards using <article> with onclick handlers) create tab traps and are completely inaccessible to keyboard users without explicit tabindex, ARIA roles, and keyboard event handlers. Additionally, CSS hover states for interactivity must be explicitly mapped to :focus-visible to provide visual feedback for keyboard users.
+**Action:** Always add tabindex="0", role="button", aria-label, and onkeydown handlers (for Enter/Space) to custom interactive elements. Always map :hover CSS states to :focus-visible to ensure equivalent visual cues for keyboard navigation.
