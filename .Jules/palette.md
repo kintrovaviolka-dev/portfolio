@@ -1,0 +1,3 @@
+## 2025-06-08 - Keyboard accessibility on custom interactive elements
+**Learning:** Custom interactive elements (like `article` or `div`) configured with `onclick` often lack keyboard accessibility. Even if visually appealing, screen readers and keyboard-only users cannot interact with them properly without semantic roles or handlers for Enter and Space keys.
+**Action:** Always add `tabindex="0"`, `role="button"`, an appropriate `aria-label`, and map `.element:focus-visible` to hover styles. Finally, attach an `onkeydown` handler covering both `Enter` and `Space` key actions (with `event.preventDefault()` to avoid page scroll for Space) when working with `onclick` elements.
