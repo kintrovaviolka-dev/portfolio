@@ -1,0 +1,3 @@
+## 2026-06-11 - Interactive Element Keyboard Accessibility
+**Learning:** When making non-interactive elements (like cards with onclick handlers that trigger structural transformations) keyboard accessible, do not just blindly map `:hover` states to `:focus-visible`. This can prevent users from controlling the state change via keyboard activation (Enter/Space).
+**Action:** Always add `role="button"`, `tabindex="0"`, an appropriate `aria-label`, and an `onkeydown` handler to allow users to trigger the interactive behavior manually using Enter or Space. Use a separate `:focus-visible` outline to provide visual focus indication without prematurely triggering hover-based transformations.
