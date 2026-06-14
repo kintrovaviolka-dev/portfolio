@@ -344,6 +344,12 @@
             perspective: 1000px;
         }
 
+        .flip-card:focus-visible {
+            outline: 2px solid var(--electric-blue);
+            outline-offset: 4px;
+            border-radius: 12px;
+        }
+
         .flip-card-inner {
             position: relative;
             width: 100%;
@@ -993,7 +999,7 @@
             <h2 class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped')}" tabindex="0" role="button" aria-label="Toggle Developer Identity">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev"></i>
@@ -1015,7 +1021,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')">
+                <article class="flip-card" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped')}" tabindex="0" role="button" aria-label="Toggle Medical Identity">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med"></i>

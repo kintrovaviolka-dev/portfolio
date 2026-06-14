@@ -1,0 +1,3 @@
+## 2024-05-15 - Make custom non-interactive elements keyboard accessible
+**Learning:** Custom interactive elements (like `article` with `onclick` handlers) are not inherently keyboard accessible. Simply binding `onclick` ignores users navigating via keyboard. Additionally, blind mapping `:hover` to `:focus-visible` can be detrimental if the hover state triggers a structural change, as users cannot control the activation.
+**Action:** Always add `tabindex="0"`, `role="button"`, `aria-label`, and an `onkeydown` handler supporting `Enter` and `Space` (with `event.preventDefault()` for Space to prevent page scroll) to non-standard interactive elements. Provide clear `:focus-visible` outlines without automatically triggering structural state changes like card flips.
