@@ -1,7 +1,7 @@
 # portfolio
 # 🩺 Viola Kintrová – Portfolio 💻
 
-### Medical Student @ MUNI | Security-First Full-Stack Developer
+### Medical Student @ LFOU | Security-First Full-Stack Developer
 
 Tento repozitář obsahuje mé osobní portfolio, které vizuálně i technicky propojuje dva světy: medicínu a moderní webový vývoj. Postaveno na čistém kódu, bez těžkopádných frameworků.
 
