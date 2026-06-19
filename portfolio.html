@@ -953,9 +953,34 @@
                 filter: none;
             }
         }
+
+        /* Accessibility Improvements */
+        *:focus-visible {
+            outline: 2px solid var(--electric-blue);
+            outline-offset: 4px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--electric-blue);
+            color: var(--bg-primary);
+            padding: 8px;
+            z-index: 9999;
+            transition: top 0.2s ease-out;
+            border-radius: 0 0 4px 0;
+            font-weight: 700;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: none; /* Already handling focus visually */
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Custom cursor elements -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
@@ -974,7 +999,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <!-- Hero Section -->
         <section id="hero">
             <canvas id="dna-canvas"></canvas>
