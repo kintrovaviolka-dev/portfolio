@@ -898,12 +898,14 @@
                 padding: 2rem;
                 gap: 1.5rem;
                 transform: translateY(-150%);
-                transition: transform 0.3s ease;
+                visibility: hidden;
+                transition: transform 0.3s ease, visibility 0.3s ease;
                 border-bottom: 1px solid var(--border-color);
             }
             
             .nav-links.nav-open {
                 transform: translateY(0);
+                visibility: visible;
             }
 
             .hamburger {
@@ -988,7 +990,7 @@
     <header>
         <nav>
             <div class="brand-logo">VK</div>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <div class="nav-links" id="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -1375,13 +1377,15 @@
             const navItems = document.querySelectorAll('.nav-link');
 
             hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('nav-open');
+                const isOpen = navLinks.classList.toggle('nav-open');
+                hamburger.setAttribute('aria-expanded', isOpen.toString());
             });
 
             navItems.forEach(item => {
                 item.addEventListener('click', () => {
                     if(navLinks.classList.contains('nav-open')) {
                         navLinks.classList.remove('nav-open');
+                        hamburger.setAttribute('aria-expanded', 'false');
                     }
                 });
             });
