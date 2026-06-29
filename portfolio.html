@@ -1403,8 +1403,10 @@
                         const currentId = entry.target.getAttribute('id');
                         navItems.forEach(item => {
                             item.classList.remove('active');
+                            item.removeAttribute('aria-current');
                             if (item.getAttribute('href') === `#${currentId}`) {
                                 item.classList.add('active');
+                                item.setAttribute('aria-current', 'page');
                             }
                         });
                     }
