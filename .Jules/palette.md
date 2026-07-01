@@ -1,3 +1,7 @@
+## 2026-06-16 - [Decorative Symbols & External Link Accessibility]
+**Learning:** [Decorative symbols like arrows (&darr;) within interactive elements can cause screen readers to announce confusing characters. External links opening in a new tab without proper context and security attributes can cause a poor and insecure experience.]
+**Action:** [Always wrap decorative symbols in `<span aria-hidden="true">`. Add `rel="noopener noreferrer"` and an `aria-label` (e.g., 'opens in a new tab') to `target="_blank"` links.]
+
 ## 2026-06-16 - [Scrollspy Navigation Accessibility]
 **Learning:** [When implementing scrollspy navigation (e.g., using IntersectionObserver), visually updating the active navigation link is not enough for screen readers. The 'aria-current="page"' attribute must be dynamically managed alongside visual classes.]
 **Action:** [In scrollspy logic, ensure you remove 'aria-current' from links losing active status and set 'aria-current="page"' on the link becoming active.]
