@@ -13,3 +13,7 @@
 ## 2023-10-24 - Mobile Navigation Tab Trap & Aria-Expanded
 **Learning:** Off-canvas menus hidden via `transform: translateY` still remain accessible to screen readers and keyboard focus unless explicitly hidden using `visibility: hidden` or `display: none`. Furthermore, the menu toggle button must dynamically update its `aria-expanded` attribute for screen readers.
 **Action:** When implementing animated off-canvas elements, always combine transforms with `visibility: hidden`/`visible` and `transition` on visibility. Add `aria-expanded` logic to toggle buttons in JavaScript to reflect state accurately.
+
+## 2025-05-18 - Decorative Icons and Emojis Accessibility
+**Learning:** While decorative text symbols (like HTML entities) are often properly hidden from screen readers, developers sometimes forget that CSS-generated icons (`::before`/`::after` content) and emojis are also announced by screen readers, which can add confusing noise (e.g., "Less than slash greater than" or "Flag of Czechia").
+**Action:** Always explicitly add `aria-hidden="true"` to purely decorative icons (like `<i class="icon-*">`) and emojis to prevent redundant or confusing screen reader announcements.
