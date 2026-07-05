@@ -17,3 +17,7 @@
 ## 2026-06-16 - [Decorative Emojis & Icon Accessibility]
 **Learning:** Decorative emojis (like flags) or purely visual CSS-generated icons (like `</>` or `⚕`) are announced by screen readers, leading to confusing or redundant information for users relying on assistive technologies.
 **Action:** Always wrap purely decorative text emojis or icon elements with `aria-hidden="true"` to prevent screen readers from reading them out loud.
+
+## 2024-07-05 - Keyboard Accessible Mobile Menus (Escape Key)
+**Learning:** Mobile off-canvas menus without an explicit close button or Escape key support can create accessibility traps for keyboard users. Users expect to press `Escape` to close modals, popovers, and menus.
+**Action:** When implementing custom mobile navigation, always add a document `keydown` listener to listen for the `Escape` key, close the menu, update `aria-expanded`, and return focus to the toggle button.
