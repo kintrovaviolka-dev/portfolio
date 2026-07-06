@@ -17,3 +17,7 @@
 ## 2026-06-16 - [Decorative Emojis & Icon Accessibility]
 **Learning:** Decorative emojis (like flags) or purely visual CSS-generated icons (like `</>` or `⚕`) are announced by screen readers, leading to confusing or redundant information for users relying on assistive technologies.
 **Action:** Always wrap purely decorative text emojis or icon elements with `aria-hidden="true"` to prevent screen readers from reading them out loud.
+
+## 2026-10-24 - [Mobile Navigation Keyboard Trap on Escape]
+**Learning:** Custom mobile or off-canvas navigation menus can act as keyboard accessibility traps if they do not provide a standard way to dismiss them using the keyboard, such as pressing the `Escape` key, and failing to return focus to the toggle element.
+**Action:** Add a document-level `keydown` listener for the `Escape` key to close the menu and programmatically return focus to the toggle element (e.g., hamburger button) to prevent keyboard accessibility traps.
