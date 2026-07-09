@@ -21,3 +21,7 @@
 ## 2026-06-16 - [Mobile Menu Escape Key Accessibility]
 **Learning:** When users open a mobile navigation menu via a hamburger button, they expect to be able to close it using the `Escape` key. If they do so, focus should programmatically return to the toggle button (the hamburger button) to prevent keyboard tab traps and maintain logical focus flow.
 **Action:** Add a document-level `keydown` listener that checks for the `Escape` key, closes the menu, updates `aria-expanded` on the toggle button to `false`, and calls `.focus()` on the toggle button.
+
+## 2026-06-16 - [Mobile Toggle Button Visual Feedback]
+**Learning:** For mobile toggle buttons (such as hamburger menus), visually updating the button's text icon (e.g., from `☰` to `✕`) in JavaScript when the state changes provides clear visual feedback and creates a more intuitive user experience.
+**Action:** Dynamically update the visual text icon or class of a toggle button via JavaScript when its state changes to ensure the visual representation matches the functional state.
