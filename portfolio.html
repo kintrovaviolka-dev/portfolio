@@ -1379,6 +1379,7 @@
             hamburger.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
             navItems.forEach(item => {
@@ -1386,6 +1387,7 @@
                     if(navLinks.classList.contains('nav-open')) {
                         navLinks.classList.remove('nav-open');
                         hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.textContent = '☰';
                     }
                 });
             });
@@ -1395,6 +1397,7 @@
                 if (e.key === 'Escape' && navLinks.classList.contains('nav-open')) {
                     navLinks.classList.remove('nav-open');
                     hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.textContent = '☰';
                     hamburger.focus();
                 }
             });
