@@ -989,7 +989,7 @@
 
     <header>
         <nav>
-            <div class="brand-logo">VK</div>
+            <a href="#hero" class="brand-logo" aria-label="Return to top">VK</a>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <div class="nav-links" id="nav-links">
                 <a href="#about" class="nav-link">About</a>
@@ -1375,10 +1375,12 @@
             const navLinks = document.getElementById('nav-links');
             const sections = document.querySelectorAll('section');
             const navItems = document.querySelectorAll('.nav-link');
+            const brandLogo = document.querySelector('.brand-logo');
 
             hamburger.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
             navItems.forEach(item => {
@@ -1386,15 +1388,27 @@
                     if(navLinks.classList.contains('nav-open')) {
                         navLinks.classList.remove('nav-open');
                         hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.textContent = '☰';
                     }
                 });
             });
+
+            if (brandLogo) {
+                brandLogo.addEventListener('click', () => {
+                    if(navLinks.classList.contains('nav-open')) {
+                        navLinks.classList.remove('nav-open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.textContent = '☰';
+                    }
+                });
+            }
 
             // Close menu on Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && navLinks.classList.contains('nav-open')) {
                     navLinks.classList.remove('nav-open');
                     hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.textContent = '☰';
                     hamburger.focus();
                 }
             });
