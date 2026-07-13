@@ -21,3 +21,7 @@
 ## 2026-06-16 - [Mobile Menu Escape Key Accessibility]
 **Learning:** When users open a mobile navigation menu via a hamburger button, they expect to be able to close it using the `Escape` key. If they do so, focus should programmatically return to the toggle button (the hamburger button) to prevent keyboard tab traps and maintain logical focus flow.
 **Action:** Add a document-level `keydown` listener that checks for the `Escape` key, closes the menu, updates `aria-expanded` on the toggle button to `false`, and calls `.focus()` on the toggle button.
+
+## 2026-06-16 - [Mobile Navigation Visual Feedback & External Close Triggers]
+**Learning:** Users rely on clear visual feedback for toggle states; a hamburger menu icon should change to a close icon (e.g., '✕') when open. Furthermore, interactive elements outside the primary navigation list, such as a brand logo serving as a 'return to top' anchor, should reliably trigger the menu to close, otherwise the menu overlays the top content.
+**Action:** Dynamically toggle the content of mobile menu buttons (e.g., '☰' to '✕') based on the 'nav-open' state. Extract menu closing logic to a reusable function and explicitly bind it to external navigation elements like the brand logo.
