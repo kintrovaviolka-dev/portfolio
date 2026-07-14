@@ -25,3 +25,11 @@
 ## 2026-06-16 - [Mobile Navigation Visual Feedback & External Close Triggers]
 **Learning:** Users rely on clear visual feedback for toggle states; a hamburger menu icon should change to a close icon (e.g., '✕') when open. Furthermore, interactive elements outside the primary navigation list, such as a brand logo serving as a 'return to top' anchor, should reliably trigger the menu to close, otherwise the menu overlays the top content.
 **Action:** Dynamically toggle the content of mobile menu buttons (e.g., '☰' to '✕') based on the 'nav-open' state. Extract menu closing logic to a reusable function and explicitly bind it to external navigation elements like the brand logo.
+
+## 2026-06-16 - [Interactive Flip Card aria-expanded]
+**Learning:** For interactive toggle elements like flip cards, simply assigning a class like `flipped` isn't enough for screen readers; they need to know the state via `aria-expanded`.
+**Action:** When creating structural elements that function as toggles (e.g., `<article class="flip-card">`), add `aria-expanded="false"` and dynamically update it to `"true"` or `"false"` in the interaction handlers.
+
+## 2026-06-16 - [False Affordances with Custom Cursors]
+**Learning:** Applying interactive hover states (like an enlarged custom cursor or a pointer) to non-interactive elements (like a wrapping div without a click handler) creates a false affordance, confusing users who expect an action to occur upon clicking.
+**Action:** Carefully audit JavaScript query selectors that apply custom cursor or hover behaviors to ensure they only target genuinely clickable or interactive elements (e.g., `a`, `button`, or custom components with `onclick` handlers).

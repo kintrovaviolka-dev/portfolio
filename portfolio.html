@@ -1004,7 +1004,7 @@
     <main id="main-content" tabindex="-1">
         <!-- Hero Section -->
         <section id="hero">
-            <canvas id="dna-canvas"></canvas>
+            <canvas id="dna-canvas" aria-hidden="true"></canvas>
             <div class="hero-content">
                 <div class="profile-container">
                     <!-- Gravatar URL using the md5 hash computed: fd10ac3fc154259dd94c47f2dd03b384 -->
@@ -1025,7 +1025,7 @@
             <h2 class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Toggle Developer Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
+                <article class="flip-card" onclick="this.classList.toggle('flipped'); this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');}">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev" aria-hidden="true"></i>
@@ -1047,7 +1047,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Toggle Medical Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
+                <article class="flip-card" onclick="this.classList.toggle('flipped'); this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');}">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med" aria-hidden="true"></i>
@@ -1300,7 +1300,7 @@
 
         <!-- Contact Section -->
         <section id="contact">
-            <canvas id="contact-canvas"></canvas>
+            <canvas id="contact-canvas" aria-hidden="true"></canvas>
             <div class="contact-panel">
                 <h2 class="section-label">Get In Touch</h2>
                 <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
@@ -1353,7 +1353,7 @@
                 animateCursor();
                 
                 // Hover effects
-                const interactables = document.querySelectorAll('a, button, .flip-card, .skill-pill-wrap, .project-card-wrap');
+                const interactables = document.querySelectorAll('a, button, .flip-card');
                 interactables.forEach(el => {
                     el.addEventListener('mouseenter', () => {
                         dot.style.width = '20px';
