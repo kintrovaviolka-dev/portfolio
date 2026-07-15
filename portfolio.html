@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viola Kintrová - Medical Student & Full-Stack Developer</title>
     <meta name="description" content="Portfolio of Viola Kintrová, a medical student at the University of Ostrava and a security-first full-stack developer.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,7 +132,7 @@
             position: relative;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.active {
             color: var(--electric-blue);
         }
 
@@ -146,7 +147,7 @@
             transition: width 0.3s;
         }
 
-        .nav-links a:hover::after, .nav-links a.active::after {
+        .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a.active::after {
             width: 100%;
         }
 
@@ -313,13 +314,13 @@
             transition: left 0.5s ease;
         }
 
-        .btn:hover {
+        .btn:hover, .btn:focus-visible {
             background: rgba(0, 212, 255, 0.15);
             box-shadow: 0 0 15px var(--glow-color);
             color: #fff;
         }
 
-        .btn:hover::before {
+        .btn:hover::before, .btn:focus-visible::before {
             left: 100%;
         }
 
@@ -364,6 +365,10 @@
         .flip-card:focus-visible .flip-card-inner {
             outline: 2px solid var(--electric-blue);
             outline-offset: 4px;
+        }
+
+        #main-content:focus-visible {
+            outline: none;
         }
 
         .flip-card-front, .flip-card-back {
@@ -1015,7 +1020,7 @@
                 <p class="hero-oneliner">"I debug code and diagnose patients. Sometimes the error messages are the same."</p>
                 <div class="hero-ctas">
                     <a href="#projects" class="btn">View My Work <span aria-hidden="true">&darr;</span></a>
-                    <a href="https://github.com/kintrovaviolka-dev/portfolio/blob/c804be000642c461553641acc3f863384994f7ef/Kintrova_CV_english.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV (opens in a new tab)" class="btn">Download CV</a>
+                    <a href="https://github.com/kintrovaviolka-dev/portfolio/blob/c804be000642c461553641acc3f863384994f7ef/Kintrova_CV_english.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV (opens in a new tab)" class="btn">Download CV <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </section>
