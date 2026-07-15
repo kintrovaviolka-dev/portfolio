@@ -33,3 +33,7 @@
 ## 2026-06-16 - [False Affordances with Custom Cursors]
 **Learning:** Applying interactive hover states (like an enlarged custom cursor or a pointer) to non-interactive elements (like a wrapping div without a click handler) creates a false affordance, confusing users who expect an action to occur upon clicking.
 **Action:** Carefully audit JavaScript query selectors that apply custom cursor or hover behaviors to ensure they only target genuinely clickable or interactive elements (e.g., `a`, `button`, or custom components with `onclick` handlers).
+
+## 2023-10-25 - [Skip-to-Content Focus Ring on main tag]
+**Learning:** Universal `:focus-visible` outlines applied to structural wrappers like `<main tabindex="-1">` cause a jarring, full-page focus ring when targeted by skip-to-content links.
+**Action:** Always suppress the universal `:focus-visible` outline specifically on structural tags like `#main-content` by setting `outline: none` so that the skip link doesn't create a massive focus ring while still allowing programmatic focus.
