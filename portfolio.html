@@ -362,6 +362,10 @@
             box-shadow: -4px 4px 15px rgba(0,0,0,0.3);
         }
 
+        .flip-card:focus-visible {
+            outline: none;
+        }
+
         .flip-card:focus-visible .flip-card-inner {
             outline: 2px solid var(--electric-blue);
             outline-offset: 4px;
@@ -869,7 +873,7 @@
             transition: color 0.3s, text-shadow 0.3s;
         }
 
-        .contact-link:hover {
+        .contact-link:hover, .contact-link:focus-visible {
             color: var(--electric-blue);
             text-shadow: 0 0 10px var(--glow-color);
         }
@@ -948,6 +952,9 @@
         
         /* Reduce motion */
         @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
             * {
                 animation: none !important;
                 transition: none !important;
