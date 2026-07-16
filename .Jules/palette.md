@@ -37,3 +37,11 @@
 ## 2023-10-25 - [Skip-to-Content Focus Ring on main tag]
 **Learning:** Universal `:focus-visible` outlines applied to structural wrappers like `<main tabindex="-1">` cause a jarring, full-page focus ring when targeted by skip-to-content links.
 **Action:** Always suppress the universal `:focus-visible` outline specifically on structural tags like `#main-content` by setting `outline: none` so that the skip link doesn't create a massive focus ring while still allowing programmatic focus.
+
+## 2026-06-16 - [Reduced Motion & Smooth Scrolling]
+**Learning:** `scroll-behavior: smooth` can cause motion sickness for users who prefer reduced motion, and it persists even if `animation` and `transition` are disabled.
+**Action:** Always include `html { scroll-behavior: auto !important; }` within the `@media (prefers-reduced-motion: reduce)` block to respect user preferences.
+
+## 2026-06-16 - [Delegated Focus Rings & Universal Outline]
+**Learning:** When using a universal `*:focus-visible` outline for accessibility, elements with delegated focus styles on their children (like `.flip-card` putting focus on `.flip-card-inner`) will display two conflicting focus rings if the parent's outline isn't explicitly removed.
+**Action:** Explicitly set `outline: none` on the parent interactive element when relying on a child element to display the `:focus-visible` indicator.
