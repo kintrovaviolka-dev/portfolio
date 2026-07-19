@@ -1,3 +1,11 @@
+## 2026-06-17 - [Flip Card Double Focus Ring]
+**Learning:** When a parent interactive element (like `.flip-card`) delegates focus styling to a child element (`.flip-card-inner`), universal `*:focus-visible` rules can cause a double focus ring if the parent doesn't explicitly suppress its own outline.
+**Action:** Explicitly apply `outline: none` to the parent's `:focus-visible` state (`.flip-card:focus-visible`) to prevent double focus rings when styling is delegated to a child.
+
+## 2026-06-17 - [Prefers Reduced Motion Smooth Scroll]
+**Learning:** `scroll-behavior: smooth` persists even when `animation` and `transition` are set to `none` via `prefers-reduced-motion: reduce`, which fails to fully respect the user's preference to avoid excessive motion.
+**Action:** Always include `html { scroll-behavior: auto !important; }` within the `@media (prefers-reduced-motion: reduce)` media query.
+
 ## 2026-06-16 - [Decorative Symbols & External Link Accessibility]
 **Learning:** [Decorative symbols like arrows (&darr;) within interactive elements can cause screen readers to announce confusing characters. External links opening in a new tab without proper context and security attributes can cause a poor and insecure experience.]
 **Action:** [Always wrap decorative symbols in `<span aria-hidden="true">`. Add `rel="noopener noreferrer"` and an `aria-label` (e.g., 'opens in a new tab') to `target="_blank"` links.]

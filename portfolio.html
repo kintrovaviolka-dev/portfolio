@@ -362,6 +362,10 @@
             box-shadow: -4px 4px 15px rgba(0,0,0,0.3);
         }
 
+        .flip-card:focus-visible {
+            outline: none;
+        }
+
         .flip-card:focus-visible .flip-card-inner {
             outline: 2px solid var(--electric-blue);
             outline-offset: 4px;
@@ -948,6 +952,9 @@
         
         /* Reduce motion */
         @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
             * {
                 animation: none !important;
                 transition: none !important;
