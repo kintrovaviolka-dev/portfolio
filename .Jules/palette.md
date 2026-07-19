@@ -45,3 +45,7 @@
 ## 2023-10-25 - [Skip-to-Content Focus Ring on main tag]
 **Learning:** Universal `:focus-visible` outlines applied to structural wrappers like `<main tabindex="-1">` cause a jarring, full-page focus ring when targeted by skip-to-content links.
 **Action:** Always suppress the universal `:focus-visible` outline specifically on structural tags like `#main-content` by setting `outline: none` so that the skip link doesn't create a massive focus ring while still allowing programmatic focus.
+
+## 2026-06-16 - [Reduced Motion & Smooth Scrolling]
+**Learning:** `scroll-behavior: smooth` in CSS persists even when global `animation` and `transition` are set to `none` for users preferring reduced motion, causing unwanted motion for those users during anchor navigation.
+**Action:** When implementing `prefers-reduced-motion: reduce`, explicitly include `html { scroll-behavior: auto !important; }` within the media query.
