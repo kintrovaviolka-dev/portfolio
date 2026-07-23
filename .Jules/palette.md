@@ -45,3 +45,7 @@
 ## 2023-10-25 - [Skip-to-Content Focus Ring on main tag]
 **Learning:** Universal `:focus-visible` outlines applied to structural wrappers like `<main tabindex="-1">` cause a jarring, full-page focus ring when targeted by skip-to-content links.
 **Action:** Always suppress the universal `:focus-visible` outline specifically on structural tags like `#main-content` by setting `outline: none` so that the skip link doesn't create a massive focus ring while still allowing programmatic focus.
+
+## 2026-06-18 - [Mobile Menu Outside Click Accessibility]
+**Learning:** For mobile off-canvas navigation menus, it's not enough to close them with an explicit 'X' button or 'Escape' key. Users also expect to be able to close the menu simply by clicking anywhere outside of it. However, directly adding a document click listener can cause bugs if the toggle button itself triggers a click event, which might accidentally reopen the menu right after it was closed.
+**Action:** Implement a document-level `click` event listener to close the menu. Explicitly ensure that the click target is neither within the menu container (`!navLinks.contains(e.target)`) nor within the toggle button itself (`!hamburger.contains(e.target)`).

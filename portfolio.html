@@ -1419,6 +1419,13 @@
                 }
             });
 
+            // Close menu on outside click
+            document.addEventListener('click', (e) => {
+                if (navLinks.classList.contains('nav-open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
             // Scrollspy
             const observerOptions = {
                 root: null,
