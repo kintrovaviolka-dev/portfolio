@@ -1002,7 +1002,7 @@
     <header>
         <nav>
             <a href="#hero" class="brand-logo" aria-label="Return to top">VK</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
             <div class="nav-links" id="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -1422,6 +1422,14 @@
             // Close menu on outside click
             document.addEventListener('click', (e) => {
                 if (navLinks.classList.contains('nav-open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
+            // Close menu on focus out of nav
+            const nav = document.querySelector('nav');
+            nav.addEventListener('focusout', (e) => {
+                if (navLinks.classList.contains('nav-open') && !nav.contains(e.relatedTarget)) {
                     closeMenu();
                 }
             });
