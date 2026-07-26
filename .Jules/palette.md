@@ -49,3 +49,7 @@
 ## 2026-06-18 - [Mobile Navigation Outside Click Trap]
 **Learning:** For mobile off-canvas navigation menus, users intuitively expect to be able to close the menu by tapping anywhere outside of it. Without a document-level click listener, users can feel trapped if they don't explicitly tap the close button or a navigation link.
 **Action:** Implement a document-level `click` event listener to close the menu when a user clicks outside the menu container and not on the toggle button (`!navLinks.contains(e.target) && !hamburger.contains(e.target)`).
+
+## 2026-06-18 - [Mobile Navigation Focusout Close]
+**Learning:** For mobile off-canvas navigation menus, when a keyboard user tabs completely out of an open dropdown mobile menu, the menu should close to prevent obscuring the main content they are now focusing on.
+**Action:** Add a `focusout` event listener on the `nav` container. If `!nav.contains(e.relatedTarget)` and the menu is open, close the menu automatically.
