@@ -865,17 +865,64 @@
             text-align: center;
         }
 
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .contact-link {
             display: block;
             font-size: 1.2rem;
             color: var(--text-primary);
-            margin-bottom: 1rem;
             transition: color 0.3s, text-shadow 0.3s;
         }
 
         .contact-link:hover {
             color: var(--electric-blue);
             text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn:hover, .copy-btn:focus-visible {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--electric-blue);
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .copy-btn.copied {
+            color: #10b981;
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         .contact-closing {
@@ -1315,8 +1362,19 @@
             <canvas id="contact-canvas" aria-hidden="true"></canvas>
             <div class="contact-panel">
                 <h2 class="section-label">Get In Touch</h2>
-                <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
-                <a href="tel:+420737722493" class="contact-link">+420-737-722-493</a>
+                <div id="copy-announcer" aria-live="polite" class="sr-only"></div>
+                <div class="contact-item">
+                    <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
+                    <button class="copy-btn" aria-label="Copy email address" onclick="copyToClipboard(this, 'web.support@ifmsa.cz', 'Email address copied to clipboard')">
+                        <span aria-hidden="true">📋</span>
+                    </button>
+                </div>
+                <div class="contact-item">
+                    <a href="tel:+420737722493" class="contact-link">+420-737-722-493</a>
+                    <button class="copy-btn" aria-label="Copy phone number" onclick="copyToClipboard(this, '+420737722493', 'Phone number copied to clipboard')">
+                        <span aria-hidden="true">📋</span>
+                    </button>
+                </div>
                 <p style="color: var(--text-secondary); margin-top: 1rem;">Ostrava, Czech Republic</p>
                 <p class="contact-closing">"Open to technical collaborations, freelance work, and interesting problems."</p>
             </div>
@@ -1328,6 +1386,41 @@
     </footer>
 
     <script>
+        // Copy to clipboard with race condition and screen reader handling
+        window.copyToClipboard = (button, text, announcementText) => {
+            if (!navigator.clipboard) {
+                console.warn("Clipboard API not available");
+                return;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                // Clear existing timeout if any to prevent race condition
+                if (button.dataset.timeoutId) {
+                    clearTimeout(parseInt(button.dataset.timeoutId));
+                }
+
+                // Visual feedback
+                button.classList.add('copied');
+                button.innerHTML = '<span aria-hidden="true">✓</span>';
+
+                // Screen reader announcement
+                const announcer = document.getElementById('copy-announcer');
+                if (announcer) announcer.textContent = announcementText;
+
+                // Reset state after 2 seconds
+                const timeoutId = setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '<span aria-hidden="true">📋</span>';
+                    if (announcer) announcer.textContent = '';
+                    delete button.dataset.timeoutId;
+                }, 2000);
+
+                button.dataset.timeoutId = timeoutId.toString();
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const isMobile = window.innerWidth <= 768;
