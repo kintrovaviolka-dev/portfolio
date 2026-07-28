@@ -1365,13 +1365,13 @@
                 <div id="copy-announcer" aria-live="polite" class="sr-only"></div>
                 <div class="contact-item">
                     <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
-                    <button class="copy-btn" aria-label="Copy email address" onclick="copyToClipboard(this, 'web.support@ifmsa.cz', 'Email address copied to clipboard')">
+                    <button class="copy-btn" title="Copy email address" aria-label="Copy email address" onclick="copyToClipboard(this, 'web.support@ifmsa.cz', 'Email address copied to clipboard')">
                         <span aria-hidden="true">📋</span>
                     </button>
                 </div>
                 <div class="contact-item">
                     <a href="tel:+420737722493" class="contact-link">+420-737-722-493</a>
-                    <button class="copy-btn" aria-label="Copy phone number" onclick="copyToClipboard(this, '+420737722493', 'Phone number copied to clipboard')">
+                    <button class="copy-btn" title="Copy phone number" aria-label="Copy phone number" onclick="copyToClipboard(this, '+420737722493', 'Phone number copied to clipboard')">
                         <span aria-hidden="true">📋</span>
                     </button>
                 </div>
@@ -1402,6 +1402,10 @@
                 // Visual feedback
                 button.classList.add('copied');
                 button.innerHTML = '<span aria-hidden="true">✓</span>';
+                if (!button.dataset.originalTitle) {
+                    button.dataset.originalTitle = button.getAttribute('title') || '';
+                }
+                button.setAttribute('title', 'Copied!');
 
                 // Screen reader announcement
                 const announcer = document.getElementById('copy-announcer');
@@ -1411,6 +1415,7 @@
                 const timeoutId = setTimeout(() => {
                     button.classList.remove('copied');
                     button.innerHTML = '<span aria-hidden="true">📋</span>';
+                    button.setAttribute('title', button.dataset.originalTitle || '');
                     if (announcer) announcer.textContent = '';
                     delete button.dataset.timeoutId;
                 }, 2000);
