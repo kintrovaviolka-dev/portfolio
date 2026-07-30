@@ -1006,12 +1006,18 @@
                 animation: none !important;
                 transition: none !important;
             }
-            #dna-canvas, #contact-canvas {
-                display: none;
+            #dna-canvas, #contact-canvas, #cursor-dot, #cursor-ring {
+                display: none !important;
             }
             .project-card-wrap:hover {
                 transform: none;
                 filter: none;
+            }
+            body, .flip-card {
+                cursor: auto !important;
+            }
+            a, button, .copy-btn {
+                cursor: pointer !important;
             }
         }
 
@@ -1439,7 +1445,7 @@
             /* ==========================================
                CUSTOM CURSOR
             ========================================== */
-            if (!isMobile) {
+            if (!isMobile && !isReducedMotion) {
                 const dot = document.getElementById('cursor-dot');
                 const ring = document.getElementById('cursor-ring');
                 
