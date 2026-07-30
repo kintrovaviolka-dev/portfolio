@@ -58,3 +58,7 @@
 ## 2026-07-28 - [Dynamic Native Tooltips for Icon Buttons]
 **Learning:** For icon-only action buttons (like "Copy to Clipboard"), providing a static `title` attribute isn't enough when the action has a dynamic success state. Users benefit from the native tooltip updating (e.g., to "Copied!") alongside visual feedback, providing explicit confirmation.
 **Action:** When implementing icon-only buttons with visual success states, always add a descriptive `title` attribute. Dynamically update this `title` attribute to reflect the success state (e.g., "Copied!") and ensure it reverts to its original value when the visual state resets.
+
+## 2026-07-29 - [Custom Cursors & Reduced Motion]
+**Learning:** Custom animated cursors with trailing or lagging effects can be highly distracting and potentially nauseating for users with vestibular disorders. These effects must respect system-level accessibility settings.
+**Action:** Always disable custom cursor elements and their associated JavaScript animation loops when `prefers-reduced-motion: reduce` is detected. Revert all interactive elements (links, buttons, interactive cards) to their native pointer cursors.
