@@ -1013,6 +1013,15 @@
                 transform: none;
                 filter: none;
             }
+            #cursor-dot, #cursor-ring {
+                display: none !important;
+            }
+            body {
+                cursor: auto !important;
+            }
+            a, button, .flip-card, .hamburger, .copy-btn {
+                cursor: pointer !important;
+            }
         }
 
         /* Accessibility Improvements */
@@ -1439,7 +1448,7 @@
             /* ==========================================
                CUSTOM CURSOR
             ========================================== */
-            if (!isMobile) {
+            if (!isMobile && !isReducedMotion) {
                 const dot = document.getElementById('cursor-dot');
                 const ring = document.getElementById('cursor-ring');
                 
