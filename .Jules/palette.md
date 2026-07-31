@@ -1,3 +1,7 @@
+## 2026-07-29 - [Prefers Reduced Motion Animated Custom Cursors]
+**Learning:** Animated custom cursors powered by `requestAnimationFrame` and CSS transitions violate the `prefers-reduced-motion` intent if left active. Simply overriding `transition: none` is insufficient because the JavaScript animation loop continues running and applying inline styles, causing a jarring, stuttering cursor experience.
+**Action:** When `prefers-reduced-motion: reduce` is active, completely hide custom cursor elements (`display: none !important`), restore default cursors on interactive elements (`cursor: auto/pointer !important`), and conditionally prevent the JavaScript animation loop from initializing.
+
 ## 2026-06-17 - [Flip Card Double Focus Ring]
 **Learning:** When a parent interactive element (like `.flip-card`) delegates focus styling to a child element (`.flip-card-inner`), universal `*:focus-visible` rules can cause a double focus ring if the parent doesn't explicitly suppress its own outline.
 **Action:** Explicitly apply `outline: none` to the parent's `:focus-visible` state (`.flip-card:focus-visible`) to prevent double focus rings when styling is delegated to a child.
