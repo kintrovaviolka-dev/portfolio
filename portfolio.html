@@ -1050,6 +1050,7 @@
     </style>
 </head>
 <body>
+    <div id="sr-announcer" aria-live="polite" class="sr-only"></div>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Custom cursor elements -->
     <div id="cursor-dot"></div>
@@ -1093,7 +1094,7 @@
             <h2 class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped'); this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');}">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev" aria-hidden="true"></i>
@@ -1115,7 +1116,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" onclick="this.classList.toggle('flipped'); this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');this.setAttribute('aria-expanded', this.classList.contains('flipped') ? 'true' : 'false');}">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med" aria-hidden="true"></i>
@@ -1371,7 +1372,6 @@
             <canvas id="contact-canvas" aria-hidden="true"></canvas>
             <div class="contact-panel">
                 <h2 class="section-label">Get In Touch</h2>
-                <div id="copy-announcer" aria-live="polite" class="sr-only"></div>
                 <div class="contact-item">
                     <a href="mailto:web.support@ifmsa.cz" class="contact-link">web.support@ifmsa.cz</a>
                     <button class="copy-btn" aria-label="Copy email address" title="Copy email address" onclick="copyToClipboard(this, 'web.support@ifmsa.cz', 'Email address copied to clipboard')">
@@ -1395,6 +1395,18 @@
     </footer>
 
     <script>
+        // Global screen reader announcement
+        window.announceToScreenReader = (text) => {
+            const announcer = document.getElementById('sr-announcer');
+            if (announcer) {
+                // Trigger reflow to ensure repeated announcements are read
+                announcer.textContent = '';
+                setTimeout(() => {
+                    announcer.textContent = text;
+                }, 50);
+            }
+        };
+
         // Copy to clipboard with race condition and screen reader handling
         window.copyToClipboard = (button, text, announcementText) => {
             if (!navigator.clipboard) {
@@ -1421,8 +1433,7 @@
                 button.setAttribute('title', 'Copied!');
 
                 // Screen reader announcement
-                const announcer = document.getElementById('copy-announcer');
-                if (announcer) announcer.textContent = announcementText;
+                window.announceToScreenReader(announcementText);
 
                 // Reset state after 2 seconds
                 const timeoutId = setTimeout(() => {
@@ -1431,7 +1442,7 @@
                     if (button.dataset.originalTitle) {
                         button.setAttribute('title', button.dataset.originalTitle);
                     }
-                    if (announcer) announcer.textContent = '';
+                    // Do not clear the global announcer, as it may interfere with other announcements
                     delete button.dataset.timeoutId;
                 }, 2000);
 
@@ -1444,6 +1455,33 @@
         document.addEventListener('DOMContentLoaded', () => {
             const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const isMobile = window.innerWidth <= 768;
+
+            /* ==========================================
+               FLIP CARDS (Dual Identity)
+            ========================================== */
+            const flipCards = document.querySelectorAll('.flip-card');
+            flipCards.forEach(card => {
+                const toggleCard = (e) => {
+                    // Prevent default behavior for Space/Enter
+                    if (e.type === 'keydown') {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                        } else {
+                            return; // Ignore other keys
+                        }
+                    }
+
+                    const isFlipped = card.classList.toggle('flipped');
+                    card.setAttribute('aria-expanded', isFlipped ? 'true' : 'false');
+
+                    const cardName = card.querySelector('.flip-card-front h3').textContent;
+                    const state = isFlipped ? 'back' : 'front';
+                    window.announceToScreenReader(`${cardName} card flipped to ${state}`);
+                };
+
+                card.addEventListener('click', toggleCard);
+                card.addEventListener('keydown', toggleCard);
+            });
 
             /* ==========================================
                CUSTOM CURSOR
