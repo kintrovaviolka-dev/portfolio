@@ -62,3 +62,7 @@
 ## 2026-07-28 - [Dynamic Native Tooltips for Icon Buttons]
 **Learning:** For icon-only action buttons (like "Copy to Clipboard"), providing a static `title` attribute isn't enough when the action has a dynamic success state. Users benefit from the native tooltip updating (e.g., to "Copied!") alongside visual feedback, providing explicit confirmation.
 **Action:** When implementing icon-only buttons with visual success states, always add a descriptive `title` attribute. Dynamically update this `title` attribute to reflect the success state (e.g., "Copied!") and ensure it reverts to its original value when the visual state resets.
+
+## 2026-07-29 - [Global Screen Reader Announcer]
+**Learning:** Having multiple localized `aria-live` regions or updating states without feedback can leave screen reader users unaware of dynamic changes, like interactive cards flipping.
+**Action:** Implement a single global `aria-live="polite"` region (e.g., `#sr-announcer` at the top of `<body>`) and use a centralized JavaScript function with a short timeout (to force reflow) to broadcast dynamic state changes reliably to assistive technologies.
