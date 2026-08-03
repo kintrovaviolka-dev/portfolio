@@ -1,3 +1,7 @@
+## 2026-08-01 - [Directional & Tactile Micro-Interactions]
+**Learning:** Adding directional micro-interactions to button icons (like an arrow moving in the direction it points) and tactile press effects (`transform: scale(...)` on `:active`) provides immediate, satisfying feedback that reinforces the action's intent. However, these translations and scale changes must be disabled for users with `prefers-reduced-motion: reduce`.
+**Action:** Use CSS transforms on `:hover` and `:focus-visible` for directional cues on icons within buttons, and on `:active` for tactile button presses. Always explicitly disable these transforms (`transform: none !important`) within a `prefers-reduced-motion: reduce` media query.
+
 ## 2026-07-29 - [Prefers Reduced Motion Animated Custom Cursors]
 **Learning:** Animated custom cursors powered by `requestAnimationFrame` and CSS transitions violate the `prefers-reduced-motion` intent if left active. Simply overriding `transition: none` is insufficient because the JavaScript animation loop continues running and applying inline styles, causing a jarring, stuttering cursor experience.
 **Action:** When `prefers-reduced-motion: reduce` is active, completely hide custom cursor elements (`display: none !important`), restore default cursors on interactive elements (`cursor: auto/pointer !important`), and conditionally prevent the JavaScript animation loop from initializing.
