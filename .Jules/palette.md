@@ -70,3 +70,7 @@
 ## 2026-07-30 - [Custom Cursors and Touch Devices]
 **Learning:** Custom JS mouse cursors and hover-based interactive effects (like magnetic tilt) can get permanently stuck on touch devices (where users tap instead of move a mouse). Relying solely on `@media (max-width: 768px)` or `window.innerWidth <= 768` fails to account for larger touch devices like iPads or touchscreen laptops, resulting in a confusing and frustrating UX where the cursor remains frozen where the user last tapped.
 **Action:** When implementing custom cursors or hover-based interactions, always explicitly disable them for touch devices by checking for pointer type. In CSS, use `@media (pointer: coarse)` to hide custom cursor elements and restore native interactions. In JavaScript, use `window.matchMedia('(pointer: coarse)').matches` to conditionally disable hover-specific event listeners and logic.
+
+## 2026-08-04 - [Section Landmarks and Accessible Names]
+**Learning:** For screen readers to correctly recognize and allow navigation by regions (sections of the page), `<section>` tags must have an explicitly defined accessible name. Without it, the semantic value of the `<section>` tag is often ignored by assistive technologies.
+**Action:** Always provide an accessible name to `<section>` tags by either referencing their visible heading with `aria-labelledby="heading-id"` or providing an explicit `aria-label="Section Name"`.
