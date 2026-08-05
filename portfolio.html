@@ -918,6 +918,13 @@
             box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
         }
 
+        .copy-btn.copy-failed {
+            color: #ef4444;
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
         .sr-only {
             position: absolute;
             width: 1px;
@@ -1414,8 +1421,46 @@
 
         // Copy to clipboard with race condition and screen reader handling
         window.copyToClipboard = (button, text, announcementText) => {
+            const handleFailure = (err) => {
+                console.error("Failed to copy text: ", err);
+
+                // Clear existing timeout if any to prevent race condition
+                if (button.dataset.timeoutId) {
+                    clearTimeout(parseInt(button.dataset.timeoutId));
+                }
+
+                // Save original title if not already saved
+                if (!button.dataset.originalTitle) {
+                    button.dataset.originalTitle = button.getAttribute('title');
+                }
+
+                // Visual feedback
+                button.classList.add('copy-failed');
+                button.innerHTML = '<span aria-hidden="true">✗</span>';
+
+                // Update native tooltip
+                button.setAttribute('title', 'Failed to copy');
+
+                // Screen reader announcement
+                window.announceToScreenReader('Failed to copy to clipboard');
+
+                // Reset state after 2 seconds
+                const timeoutId = setTimeout(() => {
+                    button.classList.remove('copy-failed');
+                    button.innerHTML = '<span aria-hidden="true">📋</span>';
+                    if (button.dataset.originalTitle) {
+                        button.setAttribute('title', button.dataset.originalTitle);
+                    }
+                    // Do not clear the global announcer, as it may interfere with other announcements
+                    delete button.dataset.timeoutId;
+                }, 2000);
+
+                button.dataset.timeoutId = timeoutId.toString();
+            };
+
             if (!navigator.clipboard) {
                 console.warn("Clipboard API not available");
+                handleFailure(new Error("Clipboard API not available"));
                 return;
             }
 
@@ -1452,9 +1497,7 @@
                 }, 2000);
 
                 button.dataset.timeoutId = timeoutId.toString();
-            }).catch(err => {
-                console.error("Failed to copy text: ", err);
-            });
+            }).catch(handleFailure);
         };
 
         document.addEventListener('DOMContentLoaded', () => {

@@ -74,3 +74,7 @@
 ## 2026-08-04 - [Section Landmarks and Accessible Names]
 **Learning:** For screen readers to correctly recognize and allow navigation by regions (sections of the page), `<section>` tags must have an explicitly defined accessible name. Without it, the semantic value of the `<section>` tag is often ignored by assistive technologies.
 **Action:** Always provide an accessible name to `<section>` tags by either referencing their visible heading with `aria-labelledby="heading-id"` or providing an explicit `aria-label="Section Name"`.
+
+## 2026-08-05 - [Visual and Screen Reader Feedback for Async Clipboard Failures]
+**Learning:** When using the asynchronous `navigator.clipboard` API, failures can occur silently if permissions are denied or if the API is unsupported. Without explicit error handling that updates the visual state (like changing the icon and tooltip) and announces the failure to screen readers via an `aria-live` region, users are left wondering if the action succeeded.
+**Action:** Always implement a `.catch()` block or fallback for clipboard operations. In the failure handler, provide clear visual error state (e.g., a red '✗' and an updated `title` attribute for native tooltips), announce the failure via a global `aria-live` region, and ensure the state resets gracefully just like the success state.
