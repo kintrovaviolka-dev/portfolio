@@ -329,6 +329,23 @@
             left: 100%;
         }
 
+        .btn span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover span, .btn:focus-visible span {
+            transform: translateY(3px);
+        }
+
+        .btn[target="_blank"]:hover span, .btn[target="_blank"]:focus-visible span {
+            transform: translate(3px, -3px);
+        }
+
+        .btn:active, .copy-btn:active, .hamburger:active {
+            transform: scale(0.96);
+        }
+
         /* About Dual Identity Section */
         #about {
             background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
@@ -1017,6 +1034,9 @@
             * {
                 animation: none !important;
                 transition: none !important;
+            }
+            .btn:active, .copy-btn:active, .hamburger:active, .btn span {
+                transform: none !important;
             }
             #dna-canvas, #contact-canvas {
                 display: none;
