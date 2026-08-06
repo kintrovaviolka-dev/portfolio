@@ -376,6 +376,34 @@
             outline-offset: 4px;
         }
 
+        .kbd-hint {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .flip-card:focus-visible .kbd-hint {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .kbd-hint kbd {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--electric-blue);
+        }
+
         #main-content:focus-visible {
             outline: none;
         }
@@ -1111,6 +1139,7 @@
                         <div class="flip-card-front">
                             <i class="icon-dev" aria-hidden="true"></i>
                             <h3>Developer Viola</h3>
+                            <span class="kbd-hint" aria-hidden="true">Press <kbd>Space</kbd> to flip</span>
                         </div>
                         <div class="flip-card-back">
                             <h3>Tech Arsenal</h3>
@@ -1123,6 +1152,7 @@
                                 <li>Role-based access control</li>
                                 <li>Payment gateway integration</li>
                             </ul>
+                            <span class="kbd-hint" aria-hidden="true">Press <kbd>Space</kbd> to close</span>
                         </div>
                     </div>
                 </article>
@@ -1133,6 +1163,7 @@
                         <div class="flip-card-front">
                             <i class="icon-med" aria-hidden="true"></i>
                             <h3>Medical Viola</h3>
+                            <span class="kbd-hint" aria-hidden="true">Press <kbd>Space</kbd> to flip</span>
                         </div>
                         <div class="flip-card-back">
                             <h3>Clinical Path</h3>
@@ -1145,6 +1176,7 @@
                                 <li>Simulation medicine</li>
                                 <li>Medical education systems</li>
                             </ul>
+                            <span class="kbd-hint" aria-hidden="true">Press <kbd>Space</kbd> to close</span>
                         </div>
                     </div>
                 </article>
