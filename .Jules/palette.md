@@ -78,3 +78,11 @@
 ## 2026-08-05 - [Visual and Screen Reader Feedback for Async Clipboard Failures]
 **Learning:** When using the asynchronous `navigator.clipboard` API, failures can occur silently if permissions are denied or if the API is unsupported. Without explicit error handling that updates the visual state (like changing the icon and tooltip) and announces the failure to screen readers via an `aria-live` region, users are left wondering if the action succeeded.
 **Action:** Always implement a `.catch()` block or fallback for clipboard operations. In the failure handler, provide clear visual error state (e.g., a red '✗' and an updated `title` attribute for native tooltips), announce the failure via a global `aria-live` region, and ensure the state resets gracefully just like the success state.
+
+## 2026-08-06 - [Visual Feedback for Hover-Dependent Interactions]
+**Learning:** For custom interactive components like flip cards that reveal content via CSS `:hover` states, mouse users get immediate, intuitive discovery of the interaction pattern. However, keyboard users who navigate to the element via `Tab` often lack visual affordance explaining how to trigger the interaction (e.g., using Space or Enter), leading to confusion.
+**Action:** Always provide explicit visual interaction hints (such as a "Press Space to flip" keyboard shortcut overlay) that remain hidden by default but become visible exclusively during `:focus-visible` to guide sighted keyboard users without cluttering the UI for pointer users.
+
+## 2026-08-06 - [Interaction Discoverability and Native HTML Constraints]
+**Learning:** For custom interactive elements like flip cards, users need discoverability cues. When design constraints explicitly forbid custom CSS (like visual keyboard hints), relying solely on `aria-label` or `aria-expanded` leaves sighted mouse users without interaction instructions if the interaction isn't immediately obvious.
+**Action:** Use native HTML attributes like `title` as a fallback mechanism for tooltips to provide interaction instructions ("Press Space or click to flip") when custom styling is prohibited. This ensures users have discoverability cues without introducing new CSS rules or breaking existing layout constraints.
