@@ -329,6 +329,10 @@
             left: 100%;
         }
 
+        .btn:active {
+            transform: scale(0.98);
+        }
+
         /* About Dual Identity Section */
         #about {
             background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
@@ -911,6 +915,10 @@
             box-shadow: 0 0 10px var(--glow-color);
         }
 
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
         .copy-btn.copied {
             color: #10b981;
             border-color: #10b981;
@@ -1033,6 +1041,9 @@
             }
             a, button, .flip-card, .hamburger, .copy-btn {
                 cursor: pointer !important;
+            }
+            .btn:active, .copy-btn:active {
+                transform: none !important;
             }
         }
 

@@ -82,3 +82,7 @@
 ## 2026-08-10 - [Interaction Hints for Custom Hover-Based Components]
 **Learning:** For custom interactive components that rely on `:hover` for mouse users (e.g., flip cards), users may not immediately know they can interact with them. Providing explicit interaction hints helps guide users.
 **Action:** Use native HTML attributes like `title="Press Space or click to flip"` as a fallback mechanism for tooltips to ensure discoverability without breaking layout constraints.
+
+## 2026-08-14 - [Tactile Feedback for Buttons]
+**Learning:** Buttons without a tactile `:active` state can feel unresponsive or "dead" when clicked, especially on fast click interactions where the browser's default click highlight might not be obvious. Providing a visual physical press effect increases user confidence that their action was registered.
+**Action:** Add subtle `transform: scale(0.98)` or similar scale-down effects to the `:active` state of buttons. Always ensure this micro-interaction is explicitly overridden (`transform: none !important`) for users with `prefers-reduced-motion: reduce`.
