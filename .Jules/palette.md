@@ -82,3 +82,7 @@
 ## 2026-08-10 - [Interaction Hints for Custom Hover-Based Components]
 **Learning:** For custom interactive components that rely on `:hover` for mouse users (e.g., flip cards), users may not immediately know they can interact with them. Providing explicit interaction hints helps guide users.
 **Action:** Use native HTML attributes like `title="Press Space or click to flip"` as a fallback mechanism for tooltips to ensure discoverability without breaking layout constraints.
+
+## 2026-08-12 - [Subtle Hover States for Tags]
+**Learning:** Elements that visually resemble interactive chips or tags (even if purely informational) can feel lifeless if they completely lack interaction states. Adding a subtle hover effect (like a slight translateY and background color change) improves the tactile feel of the UI and adds polish without suggesting false affordances.
+**Action:** When styling informational badges or tags, include a subtle `:hover` state (e.g., `transform: translateY(-2px)`) to provide visual delight and a sense of depth.
