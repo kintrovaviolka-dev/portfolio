@@ -82,3 +82,7 @@
 ## 2026-08-10 - [Interaction Hints for Custom Hover-Based Components]
 **Learning:** For custom interactive components that rely on `:hover` for mouse users (e.g., flip cards), users may not immediately know they can interact with them. Providing explicit interaction hints helps guide users.
 **Action:** Use native HTML attributes like `title="Press Space or click to flip"` as a fallback mechanism for tooltips to ensure discoverability without breaking layout constraints.
+
+## 2026-08-11 - [Dynamic Tooltips and Hover States for Icon-Only Navigation]
+**Learning:** For icon-only mobile navigation toggles (like a hamburger menu), relying on a static `aria-label="Toggle menu"` is less informative than explicit "Open menu" / "Close menu" states. Furthermore, lacking a visual hover/focus state makes the interactive nature of the toggle less obvious. Finally, users benefit from native tooltips that match the accessible label and update dynamically based on the current state.
+**Action:** When implementing mobile navigation toggles, add visible `hover` and `focus-visible` styles with a smooth `transition`. Initialize the toggle with an explicit `aria-label` and `title` (e.g., "Open menu"). In JavaScript, dynamically update both attributes (e.g., to "Close menu") when the state changes to provide accurate context to screen readers and sighted users.
