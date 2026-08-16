@@ -1071,7 +1071,7 @@
     <header>
         <nav>
             <a href="#hero" class="brand-logo" aria-label="Return to top">VK</a>
-            <button class="hamburger" id="hamburger" aria-label="Open menu" title="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="Open menu" title="Open menu" aria-expanded="false" aria-controls="nav-links" aria-keyshortcuts="Escape">☰</button>
             <div class="nav-links" id="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -1106,7 +1106,7 @@
             <h2 id="about-title" class="section-label">Dual Identity</h2>
             <div class="dual-identity-container">
                 <!-- Developer Card -->
-                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity" title="Press Space or click to flip">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity" title="Press Space or click to flip" aria-keyshortcuts="Space Enter">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-dev" aria-hidden="true"></i>
@@ -1128,7 +1128,7 @@
                 </article>
 
                 <!-- Medical Card -->
-                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity" title="Press Space or click to flip">
+                <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity" title="Press Space or click to flip" aria-keyshortcuts="Space Enter">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <i class="icon-med" aria-hidden="true"></i>
@@ -1602,8 +1602,8 @@
             hamburger.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-                hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-                hamburger.setAttribute('title', isOpen ? 'Close menu' : 'Open menu');
+                hamburger.setAttribute('aria-label', isOpen ? 'Close menu (Esc)' : 'Open menu');
+                hamburger.setAttribute('title', isOpen ? 'Close menu (Esc)' : 'Open menu');
                 hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
