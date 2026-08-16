@@ -82,3 +82,7 @@
 ## 2026-08-10 - [Interaction Hints for Custom Hover-Based Components]
 **Learning:** For custom interactive components that rely on `:hover` for mouse users (e.g., flip cards), users may not immediately know they can interact with them. Providing explicit interaction hints helps guide users.
 **Action:** Use native HTML attributes like `title="Press Space or click to flip"` as a fallback mechanism for tooltips to ensure discoverability without breaking layout constraints.
+
+## 2026-08-15 - [Dynamic Accessible Names for Toggle Buttons]
+**Learning:** For toggle buttons (e.g., mobile hamburger menus), using generic labels like "Toggle menu" is less informative than dynamic labels that explicitly state the action available based on the current state.
+**Action:** Dynamically update the `aria-label` and `title` attributes on toggle buttons via JavaScript to accurately reflect the available action (e.g., 'Open menu' vs 'Close menu') rather than relying on static, generic labels.

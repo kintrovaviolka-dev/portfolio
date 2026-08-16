@@ -1071,7 +1071,7 @@
     <header>
         <nav>
             <a href="#hero" class="brand-logo" aria-label="Return to top">VK</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+            <button class="hamburger" id="hamburger" aria-label="Open menu" title="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
             <div class="nav-links" id="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -1593,6 +1593,8 @@
                 if(navLinks.classList.contains('nav-open')) {
                     navLinks.classList.remove('nav-open');
                     hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.setAttribute('aria-label', 'Open menu');
+                    hamburger.setAttribute('title', 'Open menu');
                     hamburger.textContent = '☰';
                 }
             };
@@ -1600,6 +1602,8 @@
             hamburger.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+                hamburger.setAttribute('title', isOpen ? 'Close menu' : 'Open menu');
                 hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
