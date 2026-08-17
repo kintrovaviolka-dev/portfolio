@@ -86,3 +86,7 @@
 ## 2026-08-15 - [Dynamic Accessible Names for Toggle Buttons]
 **Learning:** For toggle buttons (e.g., mobile hamburger menus), using generic labels like "Toggle menu" is less informative than dynamic labels that explicitly state the action available based on the current state.
 **Action:** Dynamically update the `aria-label` and `title` attributes on toggle buttons via JavaScript to accurately reflect the available action (e.g., 'Open menu' vs 'Close menu') rather than relying on static, generic labels.
+
+## 2026-08-17 - [Keyboard Shortcut Accessibility Affordances]
+**Learning:** When custom interactive elements have keyboard shortcuts implemented via JavaScript (like 'Escape' to close a menu, or 'Space'/'Enter' to flip a card), users often don't know these shortcuts exist unless explicitly told, reducing discoverability.
+**Action:** Explicitly surface keyboard shortcuts to users by adding the `aria-keyshortcuts` attribute to the interactive element, and append the shortcut to visual tooltips (like `title` and `aria-label`) so both sighted and screen reader users are aware of them.
