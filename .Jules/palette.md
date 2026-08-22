@@ -86,3 +86,7 @@
 ## 2026-08-15 - [Dynamic Accessible Names for Toggle Buttons]
 **Learning:** For toggle buttons (e.g., mobile hamburger menus), using generic labels like "Toggle menu" is less informative than dynamic labels that explicitly state the action available based on the current state.
 **Action:** Dynamically update the `aria-label` and `title` attributes on toggle buttons via JavaScript to accurately reflect the available action (e.g., 'Open menu' vs 'Close menu') rather than relying on static, generic labels.
+
+## 2024-05-18 - Make 3D flip cards screen-reader accessible
+**Learning:** `backface-visibility: hidden` does not hide content from screen readers. Because of this, both the front and back of a 3D flip card are read out, causing confusion.
+**Action:** When implementing 3D flip cards, explicitly add `aria-hidden="false"` to the front face and `aria-hidden="true"` to the back face. Dynamically toggle these attributes in JavaScript when the card is flipped so screen readers only read the currently visible face.
