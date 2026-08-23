@@ -1595,6 +1595,7 @@
                     hamburger.setAttribute('aria-expanded', 'false');
                     hamburger.setAttribute('aria-label', 'Open menu');
                     hamburger.setAttribute('title', 'Open menu');
+                    hamburger.removeAttribute('aria-keyshortcuts');
                     hamburger.textContent = '☰';
                 }
             };
@@ -1602,8 +1603,13 @@
             hamburger.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-                hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-                hamburger.setAttribute('title', isOpen ? 'Close menu' : 'Open menu');
+                hamburger.setAttribute('aria-label', isOpen ? 'Close menu (Escape)' : 'Open menu');
+                hamburger.setAttribute('title', isOpen ? 'Close menu (Escape)' : 'Open menu');
+                if (isOpen) {
+                    hamburger.setAttribute('aria-keyshortcuts', 'Escape');
+                } else {
+                    hamburger.removeAttribute('aria-keyshortcuts');
+                }
                 hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
