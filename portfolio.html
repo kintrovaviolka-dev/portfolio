@@ -1108,11 +1108,11 @@
                 <!-- Developer Card -->
                 <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Developer Identity" title="Press Space or click to flip">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front">
+                        <div class="flip-card-front" aria-hidden="false">
                             <i class="icon-dev" aria-hidden="true"></i>
                             <h3>Developer Viola</h3>
                         </div>
-                        <div class="flip-card-back">
+                        <div class="flip-card-back" aria-hidden="true">
                             <h3>Tech Arsenal</h3>
                             <ul>
                                 <li>PHP (mysqli prepared statements)</li>
@@ -1130,11 +1130,11 @@
                 <!-- Medical Card -->
                 <article class="flip-card" tabindex="0" role="button" aria-expanded="false" aria-label="Toggle Medical Identity" title="Press Space or click to flip">
                     <div class="flip-card-inner">
-                        <div class="flip-card-front">
+                        <div class="flip-card-front" aria-hidden="false">
                             <i class="icon-med" aria-hidden="true"></i>
                             <h3>Medical Viola</h3>
                         </div>
-                        <div class="flip-card-back">
+                        <div class="flip-card-back" aria-hidden="true">
                             <h3>Clinical Path</h3>
                             <ul>
                                 <li>University of Ostrava</li>
@@ -1522,6 +1522,9 @@
 
                     const isFlipped = card.classList.toggle('flipped');
                     card.setAttribute('aria-expanded', isFlipped ? 'true' : 'false');
+
+                    card.querySelector('.flip-card-front').setAttribute('aria-hidden', isFlipped ? 'true' : 'false');
+                    card.querySelector('.flip-card-back').setAttribute('aria-hidden', isFlipped ? 'false' : 'true');
 
                     const cardName = card.querySelector('.flip-card-front h3').textContent;
                     const state = isFlipped ? 'back' : 'front';
