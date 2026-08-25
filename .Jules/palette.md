@@ -90,3 +90,7 @@
 ## 2026-08-20 - [Explicitly Surface Custom Keyboard Shortcuts]
 **Learning:** For custom keyboard shortcuts implemented via JavaScript (like 'Escape' to close a menu), simply adding the keydown event listener is insufficient for accessibility and discoverability. Users relying on assistive technologies or those who hover for hints need to be explicitly informed of the shortcut.
 **Action:** When implementing custom keyboard shortcuts, explicitly surface them by adding the `aria-keyshortcuts` attribute (only when the action is available) and appending the shortcut hint (e.g., '(Escape)') to visual tooltips (`title` and `aria-label`).
+
+## 2026-08-25 - [Interactive Flip Card Backface Accessibility]
+**Learning:** For 3D flip cards, CSS `backface-visibility: hidden` hides the back face visually but does not hide it from screen readers. This causes screen readers to read the back content even when it is visually hidden.
+**Action:** Explicitly set `aria-hidden="false"` on the front face and `aria-hidden="true"` on the back face initially, and dynamically toggle these attributes in JavaScript when the card flips to maintain accurate state for assistive technologies.
