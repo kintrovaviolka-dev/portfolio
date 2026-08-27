@@ -325,6 +325,10 @@
             color: #fff;
         }
 
+        .btn:active {
+            transform: scale(0.95);
+        }
+
         .btn:hover::before, .btn:focus-visible::before {
             left: 100%;
         }
@@ -911,6 +915,10 @@
             box-shadow: 0 0 10px var(--glow-color);
         }
 
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
         .copy-btn.copied {
             color: #10b981;
             border-color: #10b981;
@@ -1024,6 +1032,9 @@
             .project-card-wrap:hover {
                 transform: none;
                 filter: none;
+            }
+            .btn:active, .copy-btn:active {
+                transform: none !important;
             }
             #cursor-dot, #cursor-ring {
                 display: none !important;
