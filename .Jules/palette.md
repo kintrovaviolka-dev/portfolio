@@ -94,3 +94,7 @@
 ## 2026-08-25 - [Interactive Flip Card Backface Accessibility]
 **Learning:** For 3D flip cards, CSS `backface-visibility: hidden` hides the back face visually but does not hide it from screen readers. This causes screen readers to read the back content even when it is visually hidden.
 **Action:** Explicitly set `aria-hidden="false"` on the front face and `aria-hidden="true"` on the back face initially, and dynamically toggle these attributes in JavaScript when the card flips to maintain accurate state for assistive technologies.
+
+## 2026-08-27 - [Tactile Micro-Interactions on Buttons]
+**Learning:** Adding a subtle scale-down effect (`transform: scale(0.95)`) on the `:active` state of buttons provides satisfying tactile feedback, making the UI feel more responsive. However, it's crucial to respect the `prefers-reduced-motion` media query by resetting the transform to `none` to ensure accessibility compliance for users sensitive to motion. Additionally, capturing this state in Playwright requires holding the pressed state using `page.mouse.down()` after calculating the element's bounding box, rather than using a simple `click()`, to prevent premature navigation or state reset before the screenshot is taken.
+**Action:** When adding tactile micro-interactions like `:active` scale effects, always include `transform: none !important;` within the `@media (prefers-reduced-motion: reduce)` block. Use mouse manipulation in Playwright to effectively verify these intermediate states.
