@@ -94,3 +94,7 @@
 ## 2026-08-25 - [Interactive Flip Card Backface Accessibility]
 **Learning:** For 3D flip cards, CSS `backface-visibility: hidden` hides the back face visually but does not hide it from screen readers. This causes screen readers to read the back content even when it is visually hidden.
 **Action:** Explicitly set `aria-hidden="false"` on the front face and `aria-hidden="true"` on the back face initially, and dynamically toggle these attributes in JavaScript when the card flips to maintain accurate state for assistive technologies.
+
+## 2026-08-30 - [Tactile Feedback for Buttons and Reduced Motion]
+**Learning:** Adding a subtle `transform: scale()` to buttons on `:active` state provides satisfying tactile feedback for mouse clicks and touch taps. However, any transform modifications must be explicitly disabled when `prefers-reduced-motion: reduce` is active to respect user accessibility settings, as unexpected scaling can still trigger motion sensitivity.
+**Action:** When implementing `:active` states with `transform: scale()`, always include a corresponding `transform: none !important` override inside a `@media (prefers-reduced-motion: reduce)` block for those specific elements.
