@@ -94,3 +94,7 @@
 ## 2026-08-25 - [Interactive Flip Card Backface Accessibility]
 **Learning:** For 3D flip cards, CSS `backface-visibility: hidden` hides the back face visually but does not hide it from screen readers. This causes screen readers to read the back content even when it is visually hidden.
 **Action:** Explicitly set `aria-hidden="false"` on the front face and `aria-hidden="true"` on the back face initially, and dynamically toggle these attributes in JavaScript when the card flips to maintain accurate state for assistive technologies.
+
+## 2026-08-30 - [IntersectionObserver Stagger Delay Anti-pattern]
+**Learning:** When using an `IntersectionObserver` to animate elements into view, relying on the element's absolute index (`indexOf(entry.target)`) for `transitionDelay` causes elements that are scrolled into view later (e.g., the 4th item) to suffer an unnecessary, long delay (e.g., 450ms) even if they enter the viewport by themselves.
+**Action:** Instead of absolute indices, use a dynamic batching approach. Initialize a `staggerCounter` inside the observer callback, apply the delay as `staggerCounter * 150ms`, increment it, and use `setTimeout` (e.g., 50ms) to reset `staggerCounter = 0`. This ensures items intersecting in the same frame are staggered, but elements scrolled into view sequentially appear instantly.
