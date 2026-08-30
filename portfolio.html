@@ -1681,16 +1681,26 @@
             ========================================== */
             if (!isReducedMotion) {
                 const timelineItems = document.querySelectorAll('.timeline-item');
+                let delayCounter = 0;
+                let delayResetTimeout = null;
+
                 const timelineObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const index = Array.from(timelineItems).indexOf(entry.target);
-                            entry.target.style.transitionDelay = `${index * 150}ms`;
+                            entry.target.style.transitionDelay = `${delayCounter * 150}ms`;
                             entry.target.style.transitionProperty = 'opacity, transform';
                             entry.target.style.transitionDuration = '0.5s';
                             entry.target.style.transitionTimingFunction = 'ease';
                             entry.target.classList.add('visible');
                             observer.unobserve(entry.target); // Animate once
+                            delayCounter++;
+
+                            if (delayResetTimeout) {
+                                clearTimeout(delayResetTimeout);
+                            }
+                            delayResetTimeout = setTimeout(() => {
+                                delayCounter = 0;
+                            }, 50);
                         }
                     });
                 }, { threshold: 0.2 });
