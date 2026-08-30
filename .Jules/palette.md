@@ -94,3 +94,7 @@
 ## 2026-08-25 - [Interactive Flip Card Backface Accessibility]
 **Learning:** For 3D flip cards, CSS `backface-visibility: hidden` hides the back face visually but does not hide it from screen readers. This causes screen readers to read the back content even when it is visually hidden.
 **Action:** Explicitly set `aria-hidden="false"` on the front face and `aria-hidden="true"` on the back face initially, and dynamically toggle these attributes in JavaScript when the card flips to maintain accurate state for assistive technologies.
+
+## 2024-08-30 - Dynamic batching for scroll-based animations
+**Learning:** Using the absolute DOM index (e.g., `Array.from(timelineItems).indexOf(entry.target)`) to calculate `transitionDelay` in an `IntersectionObserver` causes elements further down the page to have excessively long delays, frustrating users who scroll quickly.
+**Action:** Use a dynamic batching approach with a local counter and a `setTimeout` to calculate the delay relative to the current batch of intersecting entries.
