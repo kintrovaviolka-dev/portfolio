@@ -1681,11 +1681,19 @@
             ========================================== */
             if (!isReducedMotion) {
                 const timelineItems = document.querySelectorAll('.timeline-item');
+                let batchCounter = 0;
+                let batchTimeout;
                 const timelineObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const index = Array.from(timelineItems).indexOf(entry.target);
-                            entry.target.style.transitionDelay = `${index * 150}ms`;
+                            entry.target.style.transitionDelay = `${batchCounter * 150}ms`;
+                            batchCounter++;
+
+                            clearTimeout(batchTimeout);
+                            batchTimeout = setTimeout(() => {
+                                batchCounter = 0;
+                            }, 50);
+
                             entry.target.style.transitionProperty = 'opacity, transform';
                             entry.target.style.transitionDuration = '0.5s';
                             entry.target.style.transitionTimingFunction = 'ease';
