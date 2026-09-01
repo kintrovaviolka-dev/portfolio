@@ -162,6 +162,9 @@
         }
 
         /* Sections */
+        section:focus, section:focus-visible {
+            outline: none;
+        }
         section {
             padding: 5rem 5%;
             position: relative;
@@ -1619,7 +1622,17 @@
             });
 
             navItems.forEach(item => {
-                item.addEventListener('click', closeMenu);
+                item.addEventListener('click', (e) => {
+                    closeMenu();
+                    const targetId = item.getAttribute('href');
+                    if (targetId && targetId.startsWith('#')) {
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            targetSection.setAttribute('tabindex', '-1');
+                            targetSection.focus();
+                        }
+                    }
+                });
             });
 
             if (brandLogo) {
