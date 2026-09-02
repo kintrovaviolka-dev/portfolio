@@ -98,3 +98,7 @@
 ## 2026-08-30 - [Staggered Scroll Animations and Transition Delays]
 **Learning:** When using `IntersectionObserver` for staggered scroll-based entrance animations, deriving `transitionDelay` from an element's absolute index in the DOM (e.g., `Array.from(timelineItems).indexOf(entry.target)`) causes excessively long delays for elements further down the page. Users scrolling quickly will face empty space while waiting for these deeply nested items to appear.
 **Action:** Use a dynamic batching approach with a local counter and `setTimeout`. Calculate the delay relative to the current batch of intersecting entries, resetting the counter after a short timeout so that subsequent scrolls start the staggered animation sequence immediately from `0ms`.
+
+## 2025-05-18 - Single-Page Hash Link Focus Management
+**Learning:** Browsers typically scroll to the target of a hash link (`#section`) but do not automatically move keyboard focus to the target element. This breaks keyboard navigation flow, as pressing 'Tab' will start from the top of the page again instead of the new section.
+**Action:** When implementing single-page navigation via hash links, intercept the click event, extract the target ID, ensure the target section has `tabindex="-1"`, and call `.focus()` programmatically. Also, make sure to add `section:focus, section:focus-visible { outline: none; }` in CSS to suppress the programmatic focus ring on section wrappers to avoid jarring visual effects for sighted users.

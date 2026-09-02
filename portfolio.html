@@ -1042,6 +1042,10 @@
             outline-offset: 4px;
         }
 
+        section:focus, section:focus-visible {
+            outline: none;
+        }
+
         .skip-link {
             position: absolute;
             top: -40px;
@@ -1647,6 +1651,25 @@
                 if (navLinks.classList.contains('nav-open') && !nav.contains(e.relatedTarget)) {
                     closeMenu();
                 }
+            });
+
+            // Single-page hash link focus management
+            const hashLinks = document.querySelectorAll('a[href^="#"]');
+            hashLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        if (!targetElement.hasAttribute('tabindex')) {
+                            targetElement.setAttribute('tabindex', '-1');
+                        }
+                        // Allow default scroll behavior, but manage focus programmatically
+                        setTimeout(() => {
+                            targetElement.focus({ preventScroll: true });
+                        }, 50); // slight delay to allow scroll to begin
+                    }
+                });
             });
 
             // Scrollspy
