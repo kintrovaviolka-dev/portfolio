@@ -171,6 +171,10 @@
             justify-content: center;
         }
 
+        section:focus, section:focus-visible {
+            outline: none;
+        }
+
         .section-label {
             font-size: 2rem;
             font-weight: 700;
@@ -1618,12 +1622,24 @@
                 hamburger.textContent = isOpen ? '✕' : '☰';
             });
 
+            const handleNavClick = (e) => {
+                closeMenu();
+                const targetId = e.currentTarget.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.setAttribute('tabindex', '-1');
+                        targetSection.focus({ preventScroll: true });
+                    }
+                }
+            };
+
             navItems.forEach(item => {
-                item.addEventListener('click', closeMenu);
+                item.addEventListener('click', handleNavClick);
             });
 
             if (brandLogo) {
-                brandLogo.addEventListener('click', closeMenu);
+                brandLogo.addEventListener('click', handleNavClick);
             }
 
             // Close menu on Escape key
