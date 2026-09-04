@@ -162,6 +162,8 @@
         }
 
         /* Sections */
+        section:focus, section:focus-visible { outline: none; }
+
         section {
             padding: 5rem 5%;
             position: relative;
@@ -1504,6 +1506,20 @@
             const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const isMobile = window.innerWidth <= 768;
             const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+            /* ==========================================
+               HASH LINK FOCUS MANAGEMENT
+            ========================================== */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.setAttribute('tabindex', '-1');
+                        targetElement.focus({ preventScroll: true });
+                    }
+                });
+            });
 
             /* ==========================================
                FLIP CARDS (Dual Identity)
