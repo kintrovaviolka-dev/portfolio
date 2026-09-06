@@ -171,6 +171,10 @@
             justify-content: center;
         }
 
+        section:focus, section:focus-visible {
+            outline: none;
+        }
+
         .section-label {
             font-size: 2rem;
             font-weight: 700;
@@ -1625,6 +1629,20 @@
             if (brandLogo) {
                 brandLogo.addEventListener('click', closeMenu);
             }
+
+            // Handle focus on hash link navigation
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = e.currentTarget.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            targetSection.setAttribute('tabindex', '-1');
+                            targetSection.focus({ preventScroll: true });
+                        }
+                    }
+                });
+            });
 
             // Close menu on Escape key
             document.addEventListener('keydown', (e) => {
