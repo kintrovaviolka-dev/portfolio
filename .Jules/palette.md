@@ -105,3 +105,7 @@
 ## 2023-10-27 - [Add Title and Aria Labels to External Links]
 **Learning:** For external app links (`mailto:`, `tel:`) or links opening in new tabs, screen reader users might not realize context shifting without an explicit `aria-label`. Similarly, sighted users benefit from a `title` tooltip for icon-only or ambiguous links (like a brand logo acting as a "return to top" button).
 **Action:** When auditing or adding links, always explicitly add `title` and `aria-label` attributes for links that trigger external apps or open new tabs, and append a visual indicator (like an arrow icon with `aria-hidden="true"`) for sighted users if it matches the design pattern.
+
+## 2026-10-27 - [Aria-Label WCAG 2.5.3 Compliance]
+**Learning:** When adding `aria-label` to elements with visible text, if the `aria-label` completely replaces the visible text without including it, it violates WCAG 2.5.3 (Label in Name). Speech-recognition users may fail to activate the link because its programmatic name does not match what they see and say.
+**Action:** Always ensure that if an element has visible text, the `aria-label` either includes that visible text exactly as it appears, or use a visually hidden `<span>` instead to append additional context (e.g., `aria-label="example.com (opens in a new tab)"` or `example.com <span class="sr-only">(opens in a new tab)</span>`).
