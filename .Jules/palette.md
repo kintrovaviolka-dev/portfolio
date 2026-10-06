@@ -109,3 +109,7 @@
 ## 2026-10-27 - [Aria-Label WCAG 2.5.3 Compliance]
 **Learning:** When adding `aria-label` to elements with visible text, if the `aria-label` completely replaces the visible text without including it, it violates WCAG 2.5.3 (Label in Name). Speech-recognition users may fail to activate the link because its programmatic name does not match what they see and say.
 **Action:** Always ensure that if an element has visible text, the `aria-label` either includes that visible text exactly as it appears, or use a visually hidden `<span>` instead to append additional context (e.g., `aria-label="example.com (opens in a new tab)"` or `example.com <span class="sr-only">(opens in a new tab)</span>`).
+
+## 2026-10-04 - [Aria-Label WCAG 2.5.3 Compliance]
+**Learning:** When an element's `aria-label` partially replaces or does not include the visible text in its entirety (e.g., a logo displaying "VK" but with `aria-label="Return to top"`), it violates WCAG 2.5.3 (Label in Name). Speech recognition users rely on speaking the visible text to activate the element.
+**Action:** Ensure the `aria-label` exactly includes the visible text (e.g., `aria-label="VK (Return to top)"`).
