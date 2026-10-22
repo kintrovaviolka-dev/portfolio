@@ -14,6 +14,7 @@ Osobní portfolio propojující klinickou medicínu a moderní softwarové inže
 | Projekt | Technologie | Popis | Odkazy |
 |---|---|---|---|
 | **Apnoická Pauzička** | `TypeScript`, `Vercel` | Interaktivní simulátor mechanické ventilace a kalkulátor parametrů pro urgentní medicínu a JIP/ARO. | [Live App](https://apnoickapauzicka.vercel.app) · [GitHub](https://github.com/kintrovaviolka-dev/ventilation) |
+| **USG School — ve vývoji** | `SwiftUI`, `ARKit`, `JavaScript`, `Node.js` | Experimentální ultrazvukový trenažér: iPhone jako sonda, webový echo prototyp a nativní sledování pohybu na monitoru. Další cíl: anatomicky věrný plicní pohled pro nácvik eFAST. | Funkční prototyp, zatím bez veřejného dema. |
 | **EuRegMe 2026 E-Shop & Guide PWA** | `PHP`, `MySQL`, `PWA` | Bezpečný full-stack e-commerce systém (prepared statements) a PWA průvodce pro evropské zasedání mediků. | [Live Site](https://ifmsa.cz/euregme26/) · [GitHub](https://github.com/kintrovaviolka-dev/portfolio) |
 | **Anesthesia Assistant PWA** | `Kotlin`, `PWA` | Klinický asistent dávkování anestetik a perioperační kalkulátor v Kotlinu. | [Live App](https://kutejosaurus-dex.vercel.app) · [GitHub](https://github.com/kintrovaviolka-dev/Anesthesia-Assistant-PWA) |
 | **IFMSA-CZ Národní web & infrastruktura** | `WordPress`, `PHP`, `Security` | Architektura, vývoj a správa oficiálního národního portálu IFMSA Česká republika. | [Live Site](https://ifmsa.cz) · [GitHub](https://github.com/kintrovaviolka-dev) |

@@ -671,6 +671,39 @@
             transition: transform 0.2s ease-out;
         }
 
+        /* A distinct blue accent marks the USG prototype throughout the card. */
+        .project-card-wrap.project-in-progress {
+            --electric-blue: #82aaff;
+            --glow-color: rgba(96, 145, 255, 0.5);
+            box-shadow: 0 0 22px rgba(96, 145, 255, 0.12);
+        }
+
+        .project-in-progress:hover {
+            filter: drop-shadow(0 12px 24px rgba(96, 145, 255, 0.2));
+        }
+
+        .project-in-progress .card-glare {
+            background: radial-gradient(circle 280px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(96, 145, 255, 0.16), transparent 70%);
+        }
+
+        .project-in-progress .project-header {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .project-in-progress .status-badge {
+            margin-left: 0;
+            color: #a9c4ff;
+            background: rgba(96, 145, 255, 0.12);
+            border: 1px solid rgba(96, 145, 255, 0.4);
+        }
+
+        .project-progress-note {
+            color: #a9c4ff;
+            font-size: 0.8rem;
+            margin-top: auto;
+        }
+
         .card-glare {
             position: absolute;
             top: 0;
@@ -1519,8 +1552,7 @@
             <canvas id="dna-canvas" aria-hidden="true"></canvas>
             <div class="hero-content">
                 <div class="profile-container">
-                    <!-- Gravatar URL using the md5 hash computed: fd10ac3fc154259dd94c47f2dd03b384 -->
-                    <img src="https://www.gravatar.com/avatar/fd10ac3fc154259dd94c47f2dd03b384?s=400" alt="Viola Kintrová Profile" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%230a0e1a\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'150\' font-weight=\'bold\' fill=\'%2300d4ff\' dominant-baseline=\'middle\' text-anchor=\'middle\'>VK</text></svg>'">
+                    <img src="pfp26.png" width="400" height="400" fetchpriority="high" alt="Viola Kintrová Profile" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%230a0e1a\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'150\' font-weight=\'bold\' fill=\'%2300d4ff\' dominant-baseline=\'middle\' text-anchor=\'middle\'>VK</text></svg>'">
                 </div>
                 <h1 id="hero-title" class="hero-name">VIOLA KINTROVÁ</h1>
                 <h2 class="hero-subtitle" data-i18n="hero_subtitle">Medical Student & Full-Stack Developer | HealthTech & Clinical Tools</h2>
@@ -1660,6 +1692,25 @@
                                 GitHub ↗
                             </a>
                         </div>
+                    </article>
+                </div>
+
+                <!-- USG School: working prototype in active development -->
+                <div class="project-card-wrap project-in-progress">
+                    <article class="project-card">
+                        <div class="card-glare" aria-hidden="true"></div>
+                        <div class="project-header">
+                            <h3 class="project-title" data-i18n="usg_title">USG School – Ultrasound Trainer</h3>
+                            <span class="status-badge status-dev" data-i18n="usg_status">In progress</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">SwiftUI</span>
+                            <span class="tag">ARKit</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                        <p class="project-desc" data-i18n="usg_desc">An experimental learning project that uses an iPhone as an ultrasound probe and displays its movement on a monitor. Combines a web echo prototype with native position tracking using SwiftUI and ARKit. The next goal is an anatomically realistic lung view for eFAST training.</p>
+                        <p class="project-progress-note" data-i18n="usg_note">Working prototype · under development</p>
                     </article>
                 </div>
 
@@ -2097,6 +2148,10 @@
         ========================================== */
         const TRANSLATIONS = {
             cs: {
+                usg_title: "USG School – ultrazvukový trenažér",
+                usg_status: "Ve vývoji",
+                usg_desc: "Experimentální výukový projekt, který využívá iPhone jako ultrazvukovou sondu a zobrazuje její pohyb na monitoru. Propojuje webový echo prototyp s nativním sledováním polohy pomocí SwiftUI a ARKit. Dalším cílem je anatomicky věrný plicní pohled pro nácvik eFAST.",
+                usg_note: "Funkční prototyp · vývoj pokračuje",
                 nav_about: "O mně",
                 nav_skills: "Dovednosti",
                 nav_projects: "Projekty",
@@ -2198,6 +2253,10 @@
                 lang_announce: "Jazyk změněn na češtinu"
             },
             en: {
+                usg_title: "USG School – Ultrasound Trainer",
+                usg_status: "In progress",
+                usg_desc: "An experimental learning project that uses an iPhone as an ultrasound probe and displays its movement on a monitor. Combines a web echo prototype with native position tracking using SwiftUI and ARKit. The next goal is an anatomically realistic lung view for eFAST training.",
+                usg_note: "Working prototype · under development",
                 nav_about: "About",
                 nav_skills: "Skills",
                 nav_projects: "Projects",
@@ -2299,6 +2358,10 @@
                 lang_announce: "Language changed to English"
             },
             es: {
+                usg_title: "USG School – Entrenador de ecografía",
+                usg_status: "En desarrollo",
+                usg_desc: "Proyecto educativo experimental que utiliza un iPhone como sonda de ecografía y muestra su movimiento en un monitor. Combina un prototipo web de ecocardiografía con seguimiento de posición mediante SwiftUI y ARKit. El próximo objetivo es una vista pulmonar anatómicamente fiel para practicar eFAST.",
+                usg_note: "Prototipo funcional · en desarrollo",
                 nav_about: "Sobre mí",
                 nav_skills: "Habilidades",
                 nav_projects: "Proyectos",
@@ -2400,6 +2463,10 @@
                 lang_announce: "Idioma cambiado a español"
             },
             fr: {
+                usg_title: "USG School – Entraînement à l’échographie",
+                usg_status: "En cours",
+                usg_desc: "Projet pédagogique expérimental utilisant un iPhone comme sonde d’échographie et affichant ses mouvements sur un moniteur. Il associe un prototype web d’échocardiographie au suivi de position natif avec SwiftUI et ARKit. Le prochain objectif est une vue pulmonaire anatomiquement fidèle pour l’entraînement à l’eFAST.",
+                usg_note: "Prototype fonctionnel · en développement",
                 nav_about: "À propos",
                 nav_skills: "Compétences",
                 nav_projects: "Projets",
